@@ -9,17 +9,24 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class ViewPrincipal extends JFrame {
 
-	private JPanel contentPane;
+	public JPanel contentPane;
+	public JButton btnReservationsAndSeats;
+	public JButton btnMyTrips;
+	public JButton btnBoardingQueue;
+	public JLabel lblTitle;
+	public JPanel contentPanel;
 
 	
 	public ViewPrincipal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 581, 594);
+		setBounds(100, 100, 581, 540);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -30,22 +37,15 @@ public class ViewPrincipal extends JFrame {
 		
 		JPanel bottomsPanel = new JPanel();
 		panelMenu.add(bottomsPanel);
-		bottomsPanel.setLayout(new GridLayout(4, 1, 0, 5));
+		bottomsPanel.setLayout(new GridLayout(3, 1, 0, 5));
 		
-		JButton btnControlTower = new JButton("Torre de Control");
-		btnControlTower.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		bottomsPanel.add(btnControlTower);
-		
-		JButton btnReservationsAndSeats = new JButton("Reservar y Asientos");
+		btnReservationsAndSeats = new JButton("Reservar y Asientos");
 		bottomsPanel.add(btnReservationsAndSeats);
 		
-		JButton btnMyTrips = new JButton("Mis Viajes");
+		btnMyTrips = new JButton("Mis Viajes");
 		bottomsPanel.add(btnMyTrips);
 		
-		JButton btnBoardingQueue = new JButton("Cola de Abordaje");
+		btnBoardingQueue = new JButton("Cola de Abordaje");
 		bottomsPanel.add(btnBoardingQueue);
 		
 		JPanel panel = new JPanel();
@@ -55,12 +55,31 @@ public class ViewPrincipal extends JFrame {
 		JPanel panelTitle = new JPanel();
 		panel.add(panelTitle, BorderLayout.NORTH);
 		
-		JLabel lblSistemaDeControl = new JLabel("Sistema de Control Aeroportuario");
-		panelTitle.add(lblSistemaDeControl);
+		lblTitle = new JLabel("Sistema de Control Aeroportuario");
+		panelTitle.add(lblTitle);
 		
-		JPanel contentPanel = new JPanel();
+		contentPanel = new JPanel();
 		panel.add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
+	}
+	
+	public void init() {
+		
+		 this.setVisible(true);
+		this.setLocationRelativeTo(null); 
+		this.setTitle(" ");
+	}
+	
+	public void setContent(JComponent c,String title) {
+		
+		setTitle(" "+title);
+		lblTitle.setText(title);
+		
+		contentPanel.removeAll();
+		contentPanel.add(c, BorderLayout.CENTER);
+		
+		contentPanel.repaint();
+		contentPanel.revalidate();
 	}
 
 }

@@ -1,0 +1,72 @@
+package com.proyecto.mvc.controllers;
+
+import javax.swing.JOptionPane;
+
+import com.proyecto.mvc.models.CircularDoubleList;
+import com.proyecto.mvc.models.Flight;
+import com.proyecto.mvc.views.ViewPrincipal;
+import com.proyecto.mvc.views.flights.FlightForm;
+import com.proyecto.mvc.views.flights.FlightIndex;
+
+public class FlightController {
+
+	private ViewPrincipal vp;
+	private CircularDoubleList flights;
+	
+	public FlightController(ViewPrincipal vp, CircularDoubleList flights) {
+		
+		vp = new ViewPrincipal();
+		flights = new CircularDoubleList();
+		
+	}
+	
+
+	
+	
+	public void create() {
+		
+		FlightForm form = new FlightForm();
+		
+		String flightNumber = form.tFlightNumber.getText();
+		
+		if(flights.checkDuplicateFlightNumber(flightNumber)) {
+			JOptionPane.showMessageDialog(null, "El numero de vuelo ya existe");
+		}else {
+			
+			String route = form.tRoute.getText();
+			String plane = (String)form.cbPlane.getSelectedItem();
+			int maximumCapacity = Integer.valueOf(form.tMaximumCapcity.getText());
+			String status = (String) form.cbStatus.getSelectedItem();
+			
+			Flight flight = new Flight(flightNumber,route,plane,maximumCapacity,status);
+			flights.add(flight);
+		}
+		
+		vp.setContent(form, "Registrar Vuelo");
+	}
+	
+	public void index() {
+		
+		FlightIndex v = new FlightIndex();
+		
+		v.btnPrevious.addActionListener(e->{//aca se da click y se obtiene el siguiente nodo de la lista
+			
+			v.textArea.setText(flights.getPrevious().toString());
+		});
+		
+		v.btnNext.addActionListener(e->{//se da click y se obtiene el anterior de la lista
+			
+			v.textArea.setText(flights.getNext().toString());
+		});
+		
+		
+		v.btnRegister.addActionListener(e->{
+			create();
+		});
+		
+		
+		vp.setContent(v, "Lista de Vuelos");
+	}
+	
+	
+}

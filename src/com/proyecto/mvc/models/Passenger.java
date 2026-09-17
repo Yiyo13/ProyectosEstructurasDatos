@@ -47,7 +47,7 @@ public class Passenger {
 
 	@Override
 	public String toString() {
-		return "Passenger [idP=" + idP + ", nameP=" + nameP + ", ageP=" + ageP + "]";
+		return "ID: " + idP + " | " + nameP + " | " + ageP + " años";
 	}
 	
 	

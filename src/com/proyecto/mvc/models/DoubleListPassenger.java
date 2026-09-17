@@ -5,6 +5,12 @@ public class DoubleListPassenger {
 	private NodePassenger last;
 	private int maxCapFlight;
 	private int currentCap;
+	private NodePassenger current;
+	
+	public DoubleListPassenger() {
+		
+	}
+	
 	public DoubleListPassenger( int maxCapFlight) {
 
 		this.first = null;
@@ -25,6 +31,7 @@ public class DoubleListPassenger {
 			first = node;
 			last = node;
 			currentCap++;
+			this.current = node;
 			return true;
 
 		}
@@ -61,6 +68,30 @@ public class DoubleListPassenger {
 
 	public NodePassenger getLast() {
 	    return last;
+	}
+	
+	public Passenger getPrevious() {
+
+		if(current == null) return null;
+
+		current = current.getPrev();
+		return current.getPassenger();
+	}
+	
+	public Passenger getNext() {//
+		
+		if(current == null) return null;
+		
+		current = current.getNext();
+		return current.getPassenger();
+	}
+	
+	public Passenger getCurrent() {
+		
+		if(current == null) return null;
+		
+		current = current.getNext();
+		return current.getPassenger();
 	}
 
 }

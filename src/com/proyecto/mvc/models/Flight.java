@@ -7,16 +7,20 @@ public class Flight {
 	private String flightNumber;
 	private String route;
 	private String planeType;
-	private int maximumCapicity;
+	private int maximumCapacity;
 	private String status;
+	private DoubleListPassenger seats;//asientos
 	
-	public Flight( String flightNumber, String route, String planeType, int maximumCapicity, String status) {
+	public Flight( String flightNumber, String route, String planeType, int maximumCapacity, String status) {
 		
 		this.flightNumber = flightNumber;
 		this.route = route;
 		this.planeType = planeType;
-		this.maximumCapicity = maximumCapicity;
+		this.maximumCapacity = maximumCapacity;
 		this.status = status;
+		
+		this.seats = new DoubleListPassenger(maximumCapacity);
+		
 	}
 
 	public String getFlightNumber() {
@@ -43,12 +47,12 @@ public class Flight {
 		this.planeType = planeType;
 	}
 
-	public int getMaximumCapicity() {
-		return maximumCapicity;
+	public int getMaximumCapacity() {
+		return maximumCapacity;
 	}
 
-	public void setMaximumCapicity(int maximumCapicity) {
-		this.maximumCapicity = maximumCapicity;
+	public void setMaximumCapacity(int maximumCapacity) {
+		this.maximumCapacity = maximumCapacity;
 	}
 
 	public String isStatus() {
@@ -58,11 +62,31 @@ public class Flight {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+
+	public DoubleListPassenger getSeats() {
+		return seats;
+	}
+
+	public void setSeats(DoubleListPassenger seats) {
+		this.seats = seats;
+	}
 
 	@Override
 	public String toString() {
-		return "Flight [flightNumber=" + flightNumber + ", route=" + route + ", planeType=" + planeType
-				+ ", maximumCapicity=" + maximumCapicity + ", status=" + status + "]";
+	    return "Vuelo " + flightNumber + "\n" +
+	           "  Ruta: "      + route       + "\n" +
+	           "  Avión: "     + planeType   + "\n" +
+	           "  Capacidad: " + maximumCapacity + "\n" +
+	           "  Estado: "    + status;
+	}
+	
+	public String printReservations() {
+		
+		return "Vuelo " + flightNumber + "\n" +
+				 "  Ruta: "      + route       + "\n" +
+				getSeats().toString();
+		
 	}
 
 }
