@@ -22,29 +22,35 @@ public class FlightController {
 		this.flightD = flightD;
 		this.flightsFile = flightsFile;
 	}
-	
 
-	
-	
 	public void create() {
 		
 		FlightForm form = new FlightForm();
 		
-		int flightNumber = Integer.valueOf(form.tFlightNumber.getText());
-		
-		if(flights.checkDuplicateFlightNumber(flightNumber)) {
-			JOptionPane.showMessageDialog(null, "El numero de vuelo ya existe");
-		}else {
+		form.btnSave.addActionListener(e->{
 			
-			String route = form.tRoute.getText();
-			String plane = (String)form.cbPlane.getSelectedItem();
-			int maximumCapacity = Integer.valueOf(form.tMaximumCapcity.getText());
-			String status = (String) form.cbStatus.getSelectedItem();
-			
-			Flight flight = new Flight(flightNumber,route,plane,maximumCapacity,status);
-			flights.add(flight);
-			flightD.saveFlights(flights, flightsFile);
-		}
+			try {
+				
+				int flightNumber = Integer.valueOf(form.tFlightNumber.getText());
+				
+				if(flights.checkDuplicateFlightNumber(flightNumber)) {
+					JOptionPane.showMessageDialog(null, "El numero de vuelo ya existe");
+					return;
+				}
+				
+				String route = form.tRoute.getText();
+				String plane = (String)form.cbPlane.getSelectedItem();
+				int maximumCapacity = Integer.valueOf(form.tMaximumCapcity.getText());
+				String status = (String) form.cbStatus.getSelectedItem();
+				
+				Flight flight = new Flight(flightNumber,route,plane,maximumCapacity,status);
+				flights.add(flight);
+				flightD.saveFlights(flights, flightsFile);
+				
+			}catch(NumberFormatException ex) {
+				JOptionPane.showMessageDialog(null, "Numero de vuelo y capacidad deben ser numeros");
+			}
+		});
 		
 		vp.setContent(form, "Registrar Vuelo");
 	}
@@ -53,12 +59,12 @@ public class FlightController {
 		
 		FlightIndex v = new FlightIndex();
 		
-		v.btnPrevious.addActionListener(e->{//aca se da click y se obtiene el siguiente nodo de la lista
+		v.btnPrevious.addActionListener(e->{
 			
 			v.textArea.setText(flights.getPrevious().toString());
 		});
 		
-		v.btnNext.addActionListener(e->{//se da click y se obtiene el anterior de la lista
+		v.btnNext.addActionListener(e->{
 			
 			v.textArea.setText(flights.getNext().toString());
 		});
@@ -68,9 +74,15 @@ public class FlightController {
 			create();
 		});
 		
+		v.btnPrioritizeFlights.addActionListener(e->{
+			
+			flights.prioritizeFlights();
+			v.textArea.setText(flights.getCurrent().toString());
+		});
 		
 		vp.setContent(v, "Lista de Vuelos");
 	}
+	
 	
 	
 }
