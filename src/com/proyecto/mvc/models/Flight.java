@@ -4,14 +4,14 @@ public class Flight {
 
 	
 	
-	private String flightNumber;
+	private int flightNumber;
 	private String route;
 	private String planeType;
 	private int maximumCapacity;
 	private String status;
 	private DoubleListPassenger seats;//asientos
 	
-	public Flight( String flightNumber, String route, String planeType, int maximumCapacity, String status) {
+	public Flight( int flightNumber, String route, String planeType, int maximumCapacity, String status) {
 		
 		this.flightNumber = flightNumber;
 		this.route = route;
@@ -23,11 +23,11 @@ public class Flight {
 		
 	}
 
-	public String getFlightNumber() {
+	public int getFlightNumber() {
 		return flightNumber;
 	}
 
-	public void setFlightNumber(String flightNumber) {
+	public void setFlightNumber(int flightNumber) {
 		this.flightNumber = flightNumber;
 	}
 
@@ -71,6 +71,12 @@ public class Flight {
 	public void setSeats(DoubleListPassenger seats) {
 		this.seats = seats;
 	}
+	
+	public double getOccupancyPercentage() {
+		
+		return (double) this.seats.getCurrentCapacity()/this.maximumCapacity;
+	}
+	
 
 	@Override
 	public String toString() {

@@ -37,11 +37,11 @@ public class PrincipalController {
 	
 	public void loadData() {
 		
-		flights.add(new Flight("13451","venecia","Boeing 737",10,"disponible"));
-		flights.add(new Flight("24582", "paris", "Airbus A320", 15, "disponible"));
-		flights.add(new Flight("35693", "madrid", "Boeing 787", 20, "disponible"));
-		flights.add(new Flight("46714", "londres", "Airbus A330", 12, "disponible"));
-		flights.add(new Flight("57825", "roma", "Boeing 737", 8, "disponible"));
+		flights.add(new Flight(12345,"venecia","Boeing 737",10,"disponible"));
+		flights.add(new Flight(24582, "paris", "Airbus A320", 15, "disponible"));
+		flights.add(new Flight(35693, "madrid", "Boeing 787", 20, "disponible"));
+		flights.add(new Flight(46714, "londres", "Airbus A330", 12, "disponible"));
+		flights.add(new Flight(57825, "roma", "Boeing 737", 8, "disponible"));
 
 		passengers.addPassenger(new Passenger(123456, "Ana Pérez",   25));
 

@@ -93,5 +93,9 @@ public class DoubleListPassenger {
 		current = current.getNext();
 		return current.getPassenger();
 	}
+	
+	public int getCurrentCapacity() {
+		return this.currentCap;
+	}
 
 }

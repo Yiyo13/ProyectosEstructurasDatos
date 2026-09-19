@@ -27,7 +27,7 @@ public class FlightController {
 		
 		FlightForm form = new FlightForm();
 		
-		String flightNumber = form.tFlightNumber.getText();
+		int flightNumber = Integer.valueOf(form.tFlightNumber.getText());
 		
 		if(flights.checkDuplicateFlightNumber(flightNumber)) {
 			JOptionPane.showMessageDialog(null, "El numero de vuelo ya existe");

@@ -43,7 +43,7 @@ public class CircularDoubleList {
 		}
 	}
 	
-	public boolean checkDuplicateFlightNumber(String flightNumber) {
+	public boolean checkDuplicateFlightNumber(int flightNumber) {
 		
 		boolean flag = false;
 		
@@ -92,7 +92,76 @@ public class CircularDoubleList {
 	}
 	
 	
-	public void quickSort() {
+	public void prioritizeFlights() {
+		
+		if(isEmpty()) return;
+		
+		Node last = this.head.getPrevious();//se obtiene el ultimo nodo de la lista
+		quickSort(this.head, last);// se le envia la cabeza y el ultimo nodo
 		
 	}
+	
+	public void quickSort(Node low, Node high) {
+		
+		if(high != null && low != high && low != high.getNext()) {
+			
+			Node pivot = partition(low,high);
+			
+			quickSort(low, pivot.getPrevious());
+			quickSort(pivot.getNext(), high);
+		}
+		
+		
+	}
+
+	private Node partition(Node low, Node high) {
+		
+		Flight pivot = high.getFlight();
+		Node i = low.getPrevious();
+		
+		for(Node j = low; j!=high; j = j.getNext()) {
+		
+			if(compare(j.getFlight(), pivot)) {
+				
+				if(i == null) {
+					i = low;
+				}else {
+					i = i.getNext();
+				}
+				
+				swap(i ,j);
+			}
+			
+		}
+		
+		if(i == null) {
+			i = low;
+		}else {
+			i = i.getNext();
+		}
+		
+		swap(i ,high);
+		
+		return i;
+	}
+	
+	private boolean compare(Flight a, Flight b) {
+		
+		double occupancyA = a.getOccupancyPercentage();
+		double occupancyB = b.getOccupancyPercentage();
+		
+		if(occupancyA != occupancyB) {
+			return occupancyA > occupancyB;
+		}
+		
+		return a.getFlightNumber() < b.getFlightNumber();
+	}
+	
+	private void swap(Node a, Node b) {
+		
+		Flight temp = a.getFlight();
+		a.setFlight(b.getFlight());
+		b.setFlight(temp);
+	}
+	
 }
