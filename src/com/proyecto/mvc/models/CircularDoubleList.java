@@ -6,7 +6,7 @@ public class CircularDoubleList {
 	private Node current;//nodo actual
 	
 	
-	
+
 	public CircularDoubleList() {
 		this.head = null;
 		
@@ -89,6 +89,26 @@ public class CircularDoubleList {
 		if(current == null) return null;
 		
 		return current.getFlight();
+	}
+	
+	public boolean selectFlight(int flightNumber) {// mueve "current" directo al vuelo indicado
+		
+		if(isEmpty()) return false;
+		
+		Node aux = this.head;
+		
+		do {
+			
+			if(aux.getFlight().getFlightNumber() == flightNumber) {
+				this.current = aux;
+				return true;
+			}
+			
+			aux = aux.getNext();
+			
+		} while (aux != this.head);
+		
+		return false;
 	}
 	
 	

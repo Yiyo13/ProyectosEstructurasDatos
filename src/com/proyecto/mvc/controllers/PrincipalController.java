@@ -22,6 +22,7 @@ public class PrincipalController {
 	private BoardingLogic boardingLogic;
 	private FlightData flightD;
 	private String flightsFile;
+	private String tripsFile;
 
 	public PrincipalController() {
 
@@ -32,11 +33,12 @@ public class PrincipalController {
 		boardingLogic = new BoardingLogic();
 		flightD = new FlightData();
 		flightsFile = "flights.json";
+		tripsFile = "trips.json";
 
 		flightController = new FlightController(vp, flights, flightD, flightsFile);
-		reservationController = new ReservationController(vp, flights, tripStack, tripLogic, flightD, flightsFile);
+		reservationController = new ReservationController(vp, flights, tripStack, tripLogic, flightD, flightsFile, tripsFile);
 		tripController = new TripController(vp, tripStack, tripLogic);
-		boardingController = new BoardingController(vp, flights, boardingLogic);
+		boardingController = new BoardingController(vp, flights, boardingLogic, flightD, flightsFile);
 	}
 
 	public void init() {
@@ -47,11 +49,14 @@ public class PrincipalController {
 			loadData();
 		}
 
+		flightD.loadTrips(tripStack, tripLogic, flights, tripsFile);
+
 		flightController.index();
 
 		vp.btnReservationsAndSeats.addActionListener(e -> { reservationController.index(); });
 		vp.btnMyTrips.addActionListener(e -> { tripController.index(); });
 		vp.btnBoardingQueue.addActionListener(e -> { boardingController.index(); });
+		vp.btnFlights.addActionListener(e -> { flightController.index(); });
 
 		vp.init();
 	}

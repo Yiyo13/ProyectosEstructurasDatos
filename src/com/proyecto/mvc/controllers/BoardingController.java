@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import com.proyecto.mvc.models.BoardingLogic;
 import com.proyecto.mvc.models.CircularDoubleList;
 import com.proyecto.mvc.models.Flight;
+import com.proyecto.mvc.models.FlightData;
 import com.proyecto.mvc.models.NodePassenger;
 import com.proyecto.mvc.models.Passenger;
 import com.proyecto.mvc.views.ViewPrincipal;
@@ -15,11 +16,16 @@ public class BoardingController {
 	private ViewPrincipal vp;
 	private CircularDoubleList flights;
 	private BoardingLogic boardingLogic;
+	private FlightData flightD;
+	private String flightsFile;
 
-	public BoardingController(ViewPrincipal vp, CircularDoubleList flights, BoardingLogic boardingLogic) {
+	public BoardingController(ViewPrincipal vp, CircularDoubleList flights, BoardingLogic boardingLogic,
+			FlightData flightD, String flightsFile) {
 		this.vp = vp;
 		this.flights = flights;
 		this.boardingLogic = boardingLogic;
+		this.flightD = flightD;
+		this.flightsFile = flightsFile;
 	}
 
 	public void index() {
@@ -49,6 +55,7 @@ public class BoardingController {
 
 				if (added) {
 					v.textArea.setText("Pasajero " + passenger.getNameP() + " agregado a la cola de abordaje");
+					flightD.saveFlights(flights, flightsFile);
 				} else {
 					JOptionPane.showMessageDialog(null, "El pasajero ya abordo o no se pudo agregar");
 				}
@@ -73,6 +80,7 @@ public class BoardingController {
 				v.textArea.setText("No hay pasajeros en la cola de abordaje");
 			} else {
 				v.textArea.setText("Abordo: " + passenger.getNameP());
+				flightD.saveFlights(flights, flightsFile);
 			}
 		});
 

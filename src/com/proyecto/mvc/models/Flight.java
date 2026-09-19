@@ -79,6 +79,11 @@ public class Flight {
 		return (double) this.seats.getCurrentCapacity()/this.maximumCapacity;
 	}
 	
+	public int getAvailableSeats() {
+		
+		return this.maximumCapacity - this.seats.getCurrentCapacity();
+	}
+	
 	public BoardingQueue getBoardingQueue() {
 	    return boardingQueue;
 	}
@@ -87,8 +92,10 @@ public class Flight {
 	public String toString() {
 	    return "Vuelo " + flightNumber + "\n" +
 	           "  Ruta: "      + route       + "\n" +
-	           "  Aviï¿½n: "     + planeType   + "\n" +
+	           "  Avión: "     + planeType   + "\n" +
 	           "  Capacidad: " + maximumCapacity + "\n" +
+	           "  Pasajeros registrados: " + this.seats.getCurrentCapacity() + "\n" +
+	           "  Espacios disponibles: "  + getAvailableSeats() + "\n" +
 	           "  Estado: "    + status;
 	}
 	
@@ -96,6 +103,9 @@ public class Flight {
 		
 		return "Vuelo " + flightNumber + "\n" +
 				 "  Ruta: "      + route       + "\n" +
+				 "  Capacidad: " + maximumCapacity + "\n" +
+				 "  Pasajeros registrados: " + this.seats.getCurrentCapacity() + "\n" +
+				 "  Espacios disponibles: "  + getAvailableSeats() + "\n\n" +
 				getSeats().toString();
 		
 	}

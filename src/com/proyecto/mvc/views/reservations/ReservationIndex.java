@@ -14,9 +14,11 @@ public class ReservationIndex extends JPanel {
 	public JButton btnStart;
 	public JButton btnEnd;
 	public JButton btnReservation;
+	public JButton btnSortAsc;
+	public JButton btnSortDesc;
 	private JPanel topContentPanel;
-	private JTextArea textArea;
-	private JComboBox comboBox;
+	public JTextArea textArea;
+	public JComboBox comboBox;
 	private JLabel lblVuelos;
 
 	/**
@@ -36,6 +38,12 @@ public class ReservationIndex extends JPanel {
 		
 		btnReservation = new JButton("Reservar");
 		bottomsPanel.add(btnReservation);
+		
+		btnSortAsc = new JButton("Ordenar edad asc");
+		bottomsPanel.add(btnSortAsc);
+		
+		btnSortDesc = new JButton("Ordenar edad desc");
+		bottomsPanel.add(btnSortDesc);
 		
 		JPanel contentPanel = new JPanel();
 		contentPanel.setBorder(new EmptyBorder(0, 16, 20, 16));

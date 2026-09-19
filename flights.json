@@ -1,0 +1,55 @@
+{
+  "flights": [
+    {
+      "flightNumber": 12345,
+      "route": "venecia",
+      "planeType": "Boeing 737",
+      "maximumCapacity": 10,
+      "status": "disponible",
+      "seats": [
+        { "id": 9712367, "name": "Yiyo Farmer 67", "age": 67, "boarded": true }
+      ],
+      "boardingQueue": [9712367]
+    },
+    {
+      "flightNumber": 24582,
+      "route": "paris",
+      "planeType": "Airbus A320",
+      "maximumCapacity": 15,
+      "status": "disponible",
+      "seats": [
+      ],
+      "boardingQueue": []
+    },
+    {
+      "flightNumber": 35693,
+      "route": "madrid",
+      "planeType": "Boeing 787",
+      "maximumCapacity": 20,
+      "status": "disponible",
+      "seats": [
+      ],
+      "boardingQueue": []
+    },
+    {
+      "flightNumber": 46714,
+      "route": "londres",
+      "planeType": "Airbus A330",
+      "maximumCapacity": 12,
+      "status": "disponible",
+      "seats": [
+      ],
+      "boardingQueue": []
+    },
+    {
+      "flightNumber": 57825,
+      "route": "roma",
+      "planeType": "Boeing 737",
+      "maximumCapacity": 8,
+      "status": "disponible",
+      "seats": [
+      ],
+      "boardingQueue": []
+    }
+  ]
+}

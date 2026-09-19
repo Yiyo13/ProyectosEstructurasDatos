@@ -130,4 +130,22 @@ public class DoubleListPassenger {
 		return this.currentCap;
 	}
 
+	@Override
+	public String toString() {
+
+		if (isEmpty()) {
+			return "No hay pasajeros registrados.";
+		}
+
+		String resultado = "";
+		NodePassenger aux = first;
+
+		while (aux != null) {
+			resultado += aux.getPassenger().toString() + "\n";
+			aux = aux.getNext();
+		}
+
+		return resultado;
+	}
+
 }

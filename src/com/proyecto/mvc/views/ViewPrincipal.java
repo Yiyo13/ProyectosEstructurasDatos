@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 public class ViewPrincipal extends JFrame {
 
 	public JPanel contentPane;
+	public JButton btnFlights;
 	public JButton btnReservationsAndSeats;
 	public JButton btnMyTrips;
 	public JButton btnBoardingQueue;
@@ -37,7 +38,10 @@ public class ViewPrincipal extends JFrame {
 		
 		JPanel bottomsPanel = new JPanel();
 		panelMenu.add(bottomsPanel);
-		bottomsPanel.setLayout(new GridLayout(3, 1, 0, 5));
+		bottomsPanel.setLayout(new GridLayout(4, 1, 0, 5));
+		
+		btnFlights = new JButton("Vuelos");
+		bottomsPanel.add(btnFlights);
 		
 		btnReservationsAndSeats = new JButton("Reservar y Asientos");
 		bottomsPanel.add(btnReservationsAndSeats);
