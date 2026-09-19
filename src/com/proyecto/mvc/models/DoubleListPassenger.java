@@ -62,6 +62,31 @@ public class DoubleListPassenger {
 
 		return true;
 	}
+	
+	public void sortByAge() {
+
+	    if (isEmpty()) {
+	        return;
+	    }
+
+	    for (NodePassenger i = first; i != null; i = i.getNext()) {
+
+	        for (NodePassenger j = i.getNext(); j != null; j = j.getNext()) {
+
+	            if (i.getPassenger().getAgeP() > j.getPassenger().getAgeP()) {
+	                swap(i, j);
+	            }
+	        }
+	    }
+	}
+
+	private void swap(NodePassenger a, NodePassenger b) {
+
+	    Passenger temp = a.getPassenger();
+	    a.setPassenger(b.getPassenger());
+	    b.setPassenger(temp);
+	}
+	
 	public NodePassenger getFirst() {
 	    return first;
 	}

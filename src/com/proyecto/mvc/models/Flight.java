@@ -10,6 +10,7 @@ public class Flight {
 	private int maximumCapacity;
 	private String status;
 	private DoubleListPassenger seats;//asientos
+	private BoardingQueue boardingQueue;
 	
 	public Flight( int flightNumber, String route, String planeType, int maximumCapacity, String status) {
 		
@@ -20,6 +21,7 @@ public class Flight {
 		this.status = status;
 		
 		this.seats = new DoubleListPassenger(maximumCapacity);
+		this.boardingQueue = new BoardingQueue();
 		
 	}
 
@@ -77,12 +79,15 @@ public class Flight {
 		return (double) this.seats.getCurrentCapacity()/this.maximumCapacity;
 	}
 	
+	public BoardingQueue getBoardingQueue() {
+	    return boardingQueue;
+	}
 
 	@Override
 	public String toString() {
 	    return "Vuelo " + flightNumber + "\n" +
 	           "  Ruta: "      + route       + "\n" +
-	           "  Avión: "     + planeType   + "\n" +
+	           "  Aviï¿½n: "     + planeType   + "\n" +
 	           "  Capacidad: " + maximumCapacity + "\n" +
 	           "  Estado: "    + status;
 	}

@@ -5,6 +5,7 @@ public class Passenger {
 	private int idP;
 	private String nameP;
 	private int ageP;
+	private boolean boarded;
 	
 	
 	public Passenger(int idP, String nameP, int ageP) {
@@ -12,6 +13,7 @@ public class Passenger {
 		this.idP = idP;
 		this.nameP = nameP;
 		this.ageP = ageP;
+		this.boarded = false;
 	}
 
 
@@ -43,11 +45,19 @@ public class Passenger {
 	public void setAgeP(int ageP) {
 		this.ageP = ageP;
 	}
+	
+	public boolean isBoarded() {
+	    return boarded;
+	}
+
+	public void setBoarded(boolean boarded) {
+	    this.boarded = boarded;
+	}
 
 
 	@Override
 	public String toString() {
-		return "ID: " + idP + " | " + nameP + " | " + ageP + " años";
+		return "ID: " + idP + " | " + nameP + " | " + ageP + " aï¿½os";
 	}
 	
 	
