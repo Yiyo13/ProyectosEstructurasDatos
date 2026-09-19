@@ -163,5 +163,28 @@ public class CircularDoubleList {
 		a.setFlight(b.getFlight());
 		b.setFlight(temp);
 	}
+	public Flight[] getAllFlights() {
+
+	    if (isEmpty()) {
+	        return new Flight[0];
+	    }
+
+	    int count = 0;
+	    Node aux = this.head;
+	    do {
+	        count++;
+	        aux = aux.getNext();
+	    } while (aux != this.head);
+
+	    
+	    Flight[] result = new Flight[count];
+	    aux = this.head;
+	    for (int i = 0; i < count; i++) {
+	        result[i] = aux.getFlight();
+	        aux = aux.getNext();
+	    }
+
+	    return result;
+	}
 	
 }

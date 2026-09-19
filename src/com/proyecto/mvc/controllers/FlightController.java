@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 import com.proyecto.mvc.models.CircularDoubleList;
 import com.proyecto.mvc.models.Flight;
+import com.proyecto.mvc.models.FlightData;
 import com.proyecto.mvc.views.ViewPrincipal;
 import com.proyecto.mvc.views.flights.FlightForm;
 import com.proyecto.mvc.views.flights.FlightIndex;
@@ -12,12 +13,14 @@ public class FlightController {
 
 	private ViewPrincipal vp;
 	private CircularDoubleList flights;
-	
-	public FlightController(ViewPrincipal vp, CircularDoubleList flights) {
-		
-		vp = new ViewPrincipal();
-		flights = new CircularDoubleList();
-		
+	private FlightData flightD;
+	private String flightsFile;
+
+	public FlightController(ViewPrincipal vp, CircularDoubleList flights, FlightData flightD , String flightsFile) {
+		this.vp = vp;
+		this.flights = flights;
+		this.flightD = flightD;
+		this.flightsFile = flightsFile;
 	}
 	
 
@@ -40,6 +43,7 @@ public class FlightController {
 			
 			Flight flight = new Flight(flightNumber,route,plane,maximumCapacity,status);
 			flights.add(flight);
+			flightD.saveFlights(flights, flightsFile);
 		}
 		
 		vp.setContent(form, "Registrar Vuelo");
