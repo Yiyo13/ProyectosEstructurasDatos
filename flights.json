@@ -7,9 +7,10 @@
       "maximumCapacity": 10,
       "status": "disponible",
       "seats": [
-        { "id": 9712367, "name": "Yiyo Farmer 67", "age": 67, "boarded": true }
+        { "id": 9712367, "name": "Yiyo Farmer 67", "age": 67, "boarded": true },
+        { "id": 22222, "name": "mathias medina", "age": 33, "boarded": true }
       ],
-      "boardingQueue": [9712367]
+      "boardingQueue": []
     },
     {
       "flightNumber": 24582,
@@ -48,6 +49,7 @@
       "maximumCapacity": 8,
       "status": "disponible",
       "seats": [
+        { "id": 22222, "name": "mathias medina", "age": 22, "boarded": true }
       ],
       "boardingQueue": []
     }

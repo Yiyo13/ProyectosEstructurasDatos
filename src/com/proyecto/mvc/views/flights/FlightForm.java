@@ -6,6 +6,8 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FlightForm extends JPanel {
 	public JTextField tFlightNumber;
@@ -70,6 +72,10 @@ public class FlightForm extends JPanel {
 		add(btnSave);
 		
 		btnBack = new JButton("Regresar");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnBack.setBounds(267, 374, 97, 25);
 		add(btnBack);
 

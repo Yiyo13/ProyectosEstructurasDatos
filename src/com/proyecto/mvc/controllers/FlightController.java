@@ -50,8 +50,11 @@ public class FlightController {
 			}catch(NumberFormatException ex) {
 				JOptionPane.showMessageDialog(null, "Numero de vuelo y capacidad deben ser numeros");
 			}
+			
 		});
-		
+		form.btnBack.addActionListener(e->{
+			index();
+		});
 		vp.setContent(form, "Registrar Vuelo");
 	}
 	
@@ -73,6 +76,7 @@ public class FlightController {
 		v.btnRegister.addActionListener(e->{
 			create();
 		});
+		
 		
 		v.btnPrioritizeFlights.addActionListener(e->{
 			

@@ -1,5 +1,7 @@
 {
   "trips": [
+    { "flightNumber": 57825, "passengerId": 22222 },
+    { "flightNumber": 12345, "passengerId": 22222 },
     { "flightNumber": 12345, "passengerId": 9712367 }
   ]
 }
