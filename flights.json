@@ -7,8 +7,9 @@
       "maximumCapacity": 10,
       "status": "disponible",
       "seats": [
-        { "id": 9712367, "name": "Yiyo Farmer 67", "age": 67, "boarded": true },
-        { "id": 22222, "name": "mathias medina", "age": 33, "boarded": true }
+        { "id": 123, "name": "herllan quintanilla", "age": 23, "boarded": false },
+        { "id": 22222, "name": "mathias medina", "age": 33, "boarded": true },
+        { "id": 9712367, "name": "Yiyo Farmer 67", "age": 67, "boarded": true }
       ],
       "boardingQueue": []
     },
@@ -19,6 +20,8 @@
       "maximumCapacity": 15,
       "status": "disponible",
       "seats": [
+        { "id": 123, "name": "herllan quintanilla", "age": 23, "boarded": false },
+        { "id": 123, "name": "herllan quintanilla", "age": 23, "boarded": true }
       ],
       "boardingQueue": []
     },

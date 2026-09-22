@@ -6,11 +6,11 @@ public class DoubleListPassenger {
 	private int maxCapFlight;
 	private int currentCap;
 	private NodePassenger current;
-	
+
 	public DoubleListPassenger() {
-		
+
 	}
-	
+
 	public DoubleListPassenger( int maxCapFlight) {
 
 		this.first = null;
@@ -48,60 +48,60 @@ public class DoubleListPassenger {
 			node.setNext(first);
 			first.setPrev(node);
 			first = node;
-			
+
 		}else {
 			NodePassenger previous = aux.getPrev();
 			node.setPrev(previous);
 			node.setNext(aux);
 			previous.setNext(node);
 			aux.setPrev(node);
-			
-			
+
+
 		}
 		currentCap++;
 
 		return true;
 	}
-	
+
 	public void sortByAge(boolean ascending) {
 
-	    if (isEmpty()) {
-	        return;
-	    }
+		if (isEmpty()) {
+			return;
+		}
 
-	    for (NodePassenger i = first; i != null; i = i.getNext()) {
+		for (NodePassenger i = first; i != null; i = i.getNext()) {
 
-	        for (NodePassenger j = i.getNext(); j != null; j = j.getNext()) {
+			for (NodePassenger j = i.getNext(); j != null; j = j.getNext()) {
 
-	            boolean shouldSwap;
+				boolean shouldSwap;
 
-	            if (ascending) {
-	                shouldSwap = i.getPassenger().getAgeP() > j.getPassenger().getAgeP();
-	            } else {
-	                shouldSwap = i.getPassenger().getAgeP() < j.getPassenger().getAgeP();
-	            }
+				if (ascending) {
+					shouldSwap = i.getPassenger().getAgeP() > j.getPassenger().getAgeP();
+				} else {
+					shouldSwap = i.getPassenger().getAgeP() < j.getPassenger().getAgeP();
+				}
 
-	            if (shouldSwap) {
-	                swap(i, j);
-	            }
-	        }
-	    }
+				if (shouldSwap) {
+					swap(i, j);
+				}
+			}
+		}
 	}
 	private void swap(NodePassenger a, NodePassenger b) {
 
-	    Passenger temp = a.getPassenger();
-	    a.setPassenger(b.getPassenger());
-	    b.setPassenger(temp);
+		Passenger temp = a.getPassenger();
+		a.setPassenger(b.getPassenger());
+		b.setPassenger(temp);
 	}
-	
+
 	public NodePassenger getFirst() {
-	    return first;
+		return first;
 	}
 
 	public NodePassenger getLast() {
-	    return last;
+		return last;
 	}
-	
+
 	public Passenger getPrevious() {
 
 		if(current == null) return null;
@@ -109,23 +109,23 @@ public class DoubleListPassenger {
 		current = current.getPrev();
 		return current.getPassenger();
 	}
-	
+
 	public Passenger getNext() {//
-		
+
 		if(current == null) return null;
-		
-		current = current.getNext();
-		return current.getPassenger();
+
+	current = current.getNext();
+	return current.getPassenger();
 	}
-	
+
 	public Passenger getCurrent() {
-		
+
 		if(current == null) return null;
-		
-		
+
+
 		return current.getPassenger();
 	}
-	
+
 	public int getCurrentCapacity() {
 		return this.currentCap;
 	}
@@ -146,6 +146,17 @@ public class DoubleListPassenger {
 		}
 
 		return resultado;
+	}
+	public boolean checkDuplicatesPassenger(DoubleListPassenger passenger,int id) {
+		boolean flag = false;
+		if(!isEmpty()){
+			if(passenger.getCurrent().getIdP() == id) {
+				flag = true;
+			}
+		}
+
+
+		return flag;
 	}
 
 }

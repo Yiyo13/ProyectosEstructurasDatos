@@ -120,7 +120,22 @@ public class CircularDoubleList {
 		quickSort(this.head, last);// se le envia la cabeza y el ultimo nodo
 		
 	}
-	
+	// Dentro de la clase de la lista doble circular de vuelos (CircularDoubleListFlight o como la tengas nombrada)
+public void print() {
+		
+		Node aux = this.head;
+		
+		do {
+			
+			
+			System.out.println(aux.getFlight());
+			
+			
+			aux = aux.getNext();
+			
+		} while (aux != this.head);
+		
+	}
 	public void quickSort(Node low, Node high) {
 		
 		if(high != null && low != high && low != high.getNext()) {

@@ -50,6 +50,7 @@ public class ReservationController {
 				}
 				
 				int id = Integer.valueOf(v.tIdentification.getText());
+				
 				String name = v.tName.getText();
 				int age = Integer.valueOf(v.tAge.getText());
 				
@@ -57,19 +58,24 @@ public class ReservationController {
 					JOptionPane.showMessageDialog(null, "El nombre no puede estar vacio");
 					return;
 				}
-				
-				Passenger passenger = new Passenger(id, name, age);
-				
-				boolean added = flight.getSeats().addPassenger(passenger);
-				
-				if(added) {
-					tripLogic.push(tripStack, new Trip(flight, passenger));
-					flightD.saveFlights(flights, flightsFile);
-					flightD.saveTrips(tripStack, tripsFile);
-					index();
+				if(flights.getCurrent().getSeats().checkDuplicatesPassenger(flights.getCurrent().getSeats(), id)) {
+					JOptionPane.showMessageDialog(null,"El pasajero ya se encuentra registrado en este vuelo");
+					return;
 				}else {
-					JOptionPane.showMessageDialog(null, "El vuelo no tiene asientos disponibles");
+					Passenger passenger = new Passenger(id, name, age);
+					
+					boolean added = flight.getSeats().addPassenger(passenger);
+					
+					if(added) {
+						tripLogic.push(tripStack, new Trip(flight, passenger));
+						flightD.saveFlights(flights, flightsFile);
+						flightD.saveTrips(tripStack, tripsFile);
+						index();
+					}else {
+						JOptionPane.showMessageDialog(null, "El vuelo no tiene asientos disponibles");
+					}
 				}
+	
 				
 			}catch(NumberFormatException ex) {
 				JOptionPane.showMessageDialog(null, "Identificacion y edad deben ser numeros");

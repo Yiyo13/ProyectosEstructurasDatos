@@ -62,6 +62,8 @@ public class FlightController {
 		
 		FlightIndex v = new FlightIndex();
 		
+		v.textArea.setText(flights.getCurrent().toString());
+		
 		v.btnPrevious.addActionListener(e->{
 			
 			v.textArea.setText(flights.getPrevious().toString());
@@ -81,7 +83,8 @@ public class FlightController {
 		v.btnPrioritizeFlights.addActionListener(e->{
 			
 			flights.prioritizeFlights();
-			v.textArea.setText(flights.getCurrent().toString());
+			flights.print();
+			//v.textArea.setText(flights.getCurrent().toString());
 		});
 		
 		vp.setContent(v, "Lista de Vuelos");

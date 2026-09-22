@@ -2,9 +2,9 @@ package com.proyecto.mvc.models;
 
 public class Node {
 
-	private Node next;
-	private Node previous;
-	private Flight flight;
+	public Node next;
+	public  Node previous;
+	public Flight flight;
 	
 	public Node(Flight flight) {
 		
