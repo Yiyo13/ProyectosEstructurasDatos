@@ -83,8 +83,10 @@ public class FlightController {
 		v.btnPrioritizeFlights.addActionListener(e->{
 			
 			flights.prioritizeFlights();
+			//flights.print();
 			
-			v.textArea.setText(flights.getCurrent().toString());
+			v.textArea.setText(flights.getHead().getFlight().toString());
+			
 		});
 		
 		vp.setContent(v, "Lista de Vuelos");
