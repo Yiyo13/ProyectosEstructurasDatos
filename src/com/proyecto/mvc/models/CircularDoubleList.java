@@ -116,8 +116,15 @@ public class CircularDoubleList {
 		
 		if(isEmpty()) return;
 		
-		Node last = this.head.getPrevious();//se obtiene el ultimo nodo de la lista
-		quickSort(this.head, last);// se le envia la cabeza y el ultimo nodo
+		Node last = this.head.getPrevious();
+		
+		last.setNext(null);
+		this.head.setPrevious(null);
+		
+		quickSort(this.head, last);
+		
+		this.head.setPrevious(last);
+		last.setNext(this.head);
 		
 	}
 
