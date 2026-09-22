@@ -20,8 +20,7 @@
       "maximumCapacity": 15,
       "status": "disponible",
       "seats": [
-        { "id": 123, "name": "herllan quintanilla", "age": 23, "boarded": false },
-        { "id": 123, "name": "herllan quintanilla", "age": 23, "boarded": true }
+        
       ],
       "boardingQueue": []
     },

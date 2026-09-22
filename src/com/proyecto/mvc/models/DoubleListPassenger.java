@@ -148,15 +148,22 @@ public class DoubleListPassenger {
 		return resultado;
 	}
 	public boolean checkDuplicatesPassenger(DoubleListPassenger passenger,int id) {
-		boolean flag = false;
+		
 		if(!isEmpty()){
-			if(passenger.getCurrent().getIdP() == id) {
-				flag = true;
+			NodePassenger current = passenger.first;
+			
+			while(current != null) {
+				if(current.getPassenger().getIdP() == id) {
+					return true;	
+					
+				}
+				current = current.getNext();
 			}
+			
 		}
 
 
-		return flag;
+		return false;
 	}
 
 }
