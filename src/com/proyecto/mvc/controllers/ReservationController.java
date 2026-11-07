@@ -50,6 +50,7 @@ public class ReservationController {
 				}
 				
 				int id = Integer.valueOf(v.tIdentification.getText());
+				
 				String name = v.tName.getText();
 				int age = Integer.valueOf(v.tAge.getText());
 				
@@ -57,14 +58,14 @@ public class ReservationController {
 					JOptionPane.showMessageDialog(null, "El nombre no puede estar vacio");
 					return;
 				}
-				
-				Passenger passenger = new Passenger(id, name, age);
-				
-				boolean added = flight.getSeats().addPassenger(passenger);
-				
-				if(flights.existPassenger(passenger, flights.getHead().getFlight().getSeats())) {
-					JOptionPane.showMessageDialog(null, "El pasajero ya existe en este vuelo");
+				if(flights.getCurrent().getSeats().checkDuplicatesPassenger(flights.getCurrent().getSeats(), id)) {
+					JOptionPane.showMessageDialog(null,"El pasajero ya se encuentra registrado en este vuelo");
+					return;
 				}else {
+					Passenger passenger = new Passenger(id, name, age);
+					
+					boolean added = flight.getSeats().addPassenger(passenger);
+					
 					if(added) {
 						tripLogic.push(tripStack, new Trip(flight, passenger));
 						flightD.saveFlights(flights, flightsFile);
@@ -74,8 +75,7 @@ public class ReservationController {
 						JOptionPane.showMessageDialog(null, "El vuelo no tiene asientos disponibles");
 					}
 				}
-				
-				
+	
 				
 			}catch(NumberFormatException ex) {
 				JOptionPane.showMessageDialog(null, "Identificacion y edad deben ser numeros");
@@ -121,11 +121,19 @@ public class ReservationController {
 
 		v.btnStart.addActionListener(e -> {
 
+			if (flights.isEmpty()) {
+				return;
+			}
+
 			v.textArea.setText(flights.getPrevious().printReservations());
 			v.comboBox.setSelectedItem(flights.getCurrent().getFlightNumber());
 		});
 
 		v.btnEnd.addActionListener(e -> {
+
+			if (flights.isEmpty()) {
+				return;
+			}
 
 			v.textArea.setText(flights.getNext().printReservations());
 			v.comboBox.setSelectedItem(flights.getCurrent().getFlightNumber());
@@ -162,4 +170,4 @@ public class ReservationController {
 		vp.setContent(v, "Reservar y Asientos");
 	}
 	
-}
+}
