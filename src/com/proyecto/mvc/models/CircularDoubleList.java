@@ -74,6 +74,41 @@ public class CircularDoubleList {
 		return flag;
 	}
 
+	public boolean remove(int flightNumber) {
+
+		if(isEmpty()) return false;
+
+		Node aux = this.head;
+
+		do {
+
+			if(aux.getFlight().getFlightNumber() == flightNumber) {
+
+				if(aux.getNext() == aux) {// solo uno
+					this.head = null;
+					this.current = null;
+					return true;
+				}
+
+				aux.getPrevious().setNext(aux.getNext());
+				aux.getNext().setPrevious(aux.getPrevious());
+
+				if(aux == this.head) {
+					this.head = aux.getNext();
+				}
+				if(aux == this.current) {
+					this.current = aux.getNext();
+				}
+				return true;
+			}
+
+			aux = aux.getNext();
+
+		} while (aux != this.head);
+
+		return false;
+	}
+
 	public Flight getNext() {// se va moviendo hacia adelante cada que se llame este metodo
 
 		if(current == null) return null;
@@ -235,4 +270,4 @@ public class CircularDoubleList {
 
 	}
 
-}
+}

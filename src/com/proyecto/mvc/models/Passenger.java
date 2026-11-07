@@ -57,7 +57,7 @@ public class Passenger {
 
 	@Override
 	public String toString() {
-		return "ID: " + idP + " | " + nameP + " | " + ageP + " a�os";
+		return "ID: " + idP + " | " + nameP + " | " + ageP + " anios";
 	}
 	
 	

@@ -22,9 +22,11 @@ public class FlightData {
 
 				writer.write("    {\n");
 				writer.write("      \"flightNumber\": " + flight.getFlightNumber() + ",\n");
-				writer.write("      \"route\": \"" + flight.getRoute() + "\",\n");
+				writer.write("      \"origin\": \"" + flight.getOrigin() + "\",\n");
+				writer.write("      \"destination\": \"" + flight.getDestination() + "\",\n");
 				writer.write("      \"planeType\": \"" + flight.getPlaneType() + "\",\n");
 				writer.write("      \"maximumCapacity\": " + flight.getMaximumCapacity() + ",\n");
+				writer.write("      \"fuel\": " + flight.getFuel() + ",\n");
 				writer.write("      \"status\": \"" + flight.isStatus() + "\",\n");
 				writer.write("      \"seats\": [\n");
 
@@ -88,9 +90,11 @@ public class FlightData {
 			Flight currentFlight = null;
 
 			int flightNumber = 0;
-			String route = "";
+			String origin = "";
+			String destination = "";
 			String planeType = "";
 			int maximumCapacity = 0;
+			int fuel = 0;
 			String status = "";
 
 			BoardingLogic boardingLogic = new BoardingLogic();
@@ -102,8 +106,11 @@ public class FlightData {
 				if (line.startsWith("\"flightNumber\"")) {
 					flightNumber = Integer.parseInt(extractValue(line));
 
-				} else if (line.startsWith("\"route\"")) {
-					route = extractValue(line);
+				} else if (line.startsWith("\"origin\"")) {
+					origin = extractValue(line);
+
+				} else if (line.startsWith("\"destination\"")) {
+					destination = extractValue(line);
 
 				} else if (line.startsWith("\"planeType\"")) {
 					planeType = extractValue(line);
@@ -111,10 +118,13 @@ public class FlightData {
 				} else if (line.startsWith("\"maximumCapacity\"")) {
 					maximumCapacity = Integer.parseInt(extractValue(line));
 
+				} else if (line.startsWith("\"fuel\"")) {
+					fuel = Integer.parseInt(extractValue(line));
+
 				} else if (line.startsWith("\"status\"")) {
 					status = extractValue(line);
 
-					currentFlight = new Flight(flightNumber, route, planeType, maximumCapacity, status);
+					currentFlight = new Flight(flightNumber, origin, destination, planeType, maximumCapacity, fuel, status);
 					flights.add(currentFlight);
 
 				} else if (line.startsWith("{ \"id\"") && currentFlight != null) {

@@ -1,0 +1,32 @@
+{
+  "airports": [
+    "San Jose",
+    "Bogota",
+    "Miami",
+    "Nueva York",
+    "Madrid",
+    "Londres",
+    "Paris",
+    "Roma",
+    "Venecia"
+  ],
+  "connections": [
+    { "origin": "Bogota", "destination": "San Jose", "distance": 1280 },
+    { "origin": "Bogota", "destination": "Miami", "distance": 2430 },
+    { "origin": "Bogota", "destination": "Madrid", "distance": 8030 },
+    { "origin": "Miami", "destination": "San Jose", "distance": 1790 },
+    { "origin": "Miami", "destination": "Nueva York", "distance": 1760 },
+    { "origin": "Nueva York", "destination": "Paris", "distance": 5840 },
+    { "origin": "Madrid", "destination": "San Jose", "distance": 8470 },
+    { "origin": "Madrid", "destination": "Miami", "distance": 7110 },
+    { "origin": "Madrid", "destination": "Nueva York", "distance": 5770 },
+    { "origin": "Madrid", "destination": "Paris", "distance": 1050 },
+    { "origin": "Madrid", "destination": "Roma", "distance": 1360 },
+    { "origin": "Londres", "destination": "Nueva York", "distance": 5570 },
+    { "origin": "Londres", "destination": "Madrid", "distance": 1260 },
+    { "origin": "Londres", "destination": "Paris", "distance": 340 },
+    { "origin": "Paris", "destination": "Roma", "distance": 1100 },
+    { "origin": "Paris", "destination": "Venecia", "distance": 850 },
+    { "origin": "Roma", "destination": "Venecia", "distance": 400 }
+  ]
+}

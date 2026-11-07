@@ -14,6 +14,8 @@ public class FlightIndex extends JPanel {
 	public JPanel panel;
 	public JButton btnPrioritizeFlights;
 	public JButton btnRegister;
+	public JButton btnEdit;
+	public JButton btnDelete;
 
 	public FlightIndex() {
 		setLayout(new BorderLayout(0, 0));
@@ -33,11 +35,18 @@ public class FlightIndex extends JPanel {
 		btnRegister = new JButton("Registrar");
 		panel.add(btnRegister);
 		
+		btnEdit = new JButton("Editar");
+		panel.add(btnEdit);
+		
+		btnDelete = new JButton("Eliminar");
+		panel.add(btnDelete);
+		
 		JPanel centerPanel = new JPanel();
 		add(centerPanel, BorderLayout.CENTER);
 		centerPanel.setLayout(new BorderLayout(0, 0));
 		
 		textArea = new JTextArea();
+		textArea.setEditable(false);
 		textArea.setBorder(new EmptyBorder(0, 0, 0, 0));
 		centerPanel.add(textArea, BorderLayout.CENTER);
 

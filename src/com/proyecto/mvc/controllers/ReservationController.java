@@ -121,11 +121,19 @@ public class ReservationController {
 
 		v.btnStart.addActionListener(e -> {
 
+			if (flights.isEmpty()) {
+				return;
+			}
+
 			v.textArea.setText(flights.getPrevious().printReservations());
 			v.comboBox.setSelectedItem(flights.getCurrent().getFlightNumber());
 		});
 
 		v.btnEnd.addActionListener(e -> {
+
+			if (flights.isEmpty()) {
+				return;
+			}
 
 			v.textArea.setText(flights.getNext().printReservations());
 			v.comboBox.setSelectedItem(flights.getCurrent().getFlightNumber());
@@ -162,4 +170,4 @@ public class ReservationController {
 		vp.setContent(v, "Reservar y Asientos");
 	}
 	
-}
+}

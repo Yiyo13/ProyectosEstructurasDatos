@@ -1,0 +1,13 @@
+Sistema de Control Aeroportuario - Proyecto 2 EIF-207
+
+Eclipse:
+  File > Import > Existing Projects into Workspace > seleccionar esta carpeta.
+  Ejecutar com.proyecto.mvc.models.Main
+
+Consola (desde esta carpeta):
+  javac -encoding UTF-8 -d bin $(find src -name "*.java")
+  java -cp bin com.proyecto.mvc.models.Main
+
+(Todo el codigo esta sin tildes ni enies a proposito, para evitar problemas de codificacion.)
+
+Datos: flights.json, trips.json, airports.json (se crean solos si no existen).

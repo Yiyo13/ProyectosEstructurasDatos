@@ -21,13 +21,16 @@ public class ViewPrincipal extends JFrame {
 	public JButton btnReservationsAndSeats;
 	public JButton btnMyTrips;
 	public JButton btnBoardingQueue;
+	public JButton btnAVL;
+	public JButton btnAirports;
+	public JButton btnRoutes;
 	public JLabel lblTitle;
 	public JPanel contentPanel;
 
 	
 	public ViewPrincipal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 581, 540);
+		setBounds(100, 100, 1100, 650);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -38,7 +41,7 @@ public class ViewPrincipal extends JFrame {
 		
 		JPanel bottomsPanel = new JPanel();
 		panelMenu.add(bottomsPanel);
-		bottomsPanel.setLayout(new GridLayout(4, 1, 0, 5));
+		bottomsPanel.setLayout(new GridLayout(7, 1, 0, 5));
 		
 		btnFlights = new JButton("Vuelos");
 		bottomsPanel.add(btnFlights);
@@ -51,6 +54,15 @@ public class ViewPrincipal extends JFrame {
 		
 		btnBoardingQueue = new JButton("Cola de Abordaje");
 		bottomsPanel.add(btnBoardingQueue);
+		
+		btnAVL = new JButton("Arbol AVL");
+		bottomsPanel.add(btnAVL);
+		
+		btnAirports = new JButton("Aeropuertos");
+		bottomsPanel.add(btnAirports);
+		
+		btnRoutes = new JButton("Rutas");
+		bottomsPanel.add(btnRoutes);
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
@@ -86,4 +98,4 @@ public class ViewPrincipal extends JFrame {
 		contentPanel.revalidate();
 	}
 
-}
+}

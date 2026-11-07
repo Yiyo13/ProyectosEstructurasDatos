@@ -98,6 +98,10 @@ public class DoubleListPassenger {
 		return first;
 	}
 
+	public void setMaxCapFlight(int maxCapFlight) {
+		this.maxCapFlight = maxCapFlight;
+	}
+
 	public NodePassenger getLast() {
 		return last;
 	}

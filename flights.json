@@ -1,12 +1,36 @@
 {
   "flights": [
     {
+      "flightNumber": 57825,
+      "origin": "San Jose",
+      "destination": "Roma",
+      "planeType": "Boeing 737",
+      "maximumCapacity": 8,
+      "fuel": 20,
+      "status": "Programado",
+      "seats": [
+        { "id": 4643677, "name": "wtwh", "age": 2578, "boarded": false },
+        { "id": 51251524, "name": "ACF", "age": 412, "boarded": false },
+        { "id": 12412, "name": "jsdf", "age": 234, "boarded": false },
+        { "id": 15234, "name": "ATH", "age": 67, "boarded": false },
+        { "id": 25235, "name": "weqw", "age": 25, "boarded": false },
+        { "id": 25235656, "name": "asdfh", "age": 24, "boarded": false },
+        { "id": 22222, "name": "mathias medina", "age": 22, "boarded": true },
+        { "id": 12123, "name": "ABC", "age": 12, "boarded": false }
+      ],
+      "boardingQueue": []
+    },
+    {
       "flightNumber": 12345,
-      "route": "venecia",
+      "origin": "San Jose",
+      "destination": "Venecia",
       "planeType": "Boeing 737",
       "maximumCapacity": 10,
-      "status": "disponible",
+      "fuel": 45,
+      "status": "Programado",
       "seats": [
+        { "id": 15135, "name": "Geovanni", "age": 21, "boarded": true },
+        { "id": 1234, "name": "Mathias", "age": 21, "boarded": false },
         { "id": 123, "name": "herllan quintanilla", "age": 23, "boarded": false },
         { "id": 22222, "name": "mathias medina", "age": 33, "boarded": true },
         { "id": 9712367, "name": "Yiyo Farmer 67", "age": 67, "boarded": true }
@@ -14,55 +38,49 @@
       "boardingQueue": []
     },
     {
-      "flightNumber": 57825,
-      "route": "roma",
-      "planeType": "Boeing 737",
-      "maximumCapacity": 8,
-      "status": "disponible",
+      "flightNumber": 46714,
+      "origin": "San Jose",
+      "destination": "Londres",
+      "planeType": "Airbus A330",
+      "maximumCapacity": 12,
+      "fuel": 30,
+      "status": "Programado",
       "seats": [
-        { "id": 12123, "name": "ABC", "age": 12, "boarded": false },
-        { "id": 51251524, "name": "ACF", "age": 412, "boarded": false },
-        { "id": 25235656, "name": "asdfh", "age": 24, "boarded": false },
-        { "id": 15234, "name": "ATH", "age": 67, "boarded": false },
-        { "id": 12412, "name": "jsdf", "age": 234, "boarded": false },
-        { "id": 22222, "name": "mathias medina", "age": 22, "boarded": true },
-        { "id": 25235, "name": "weqw", "age": 25, "boarded": false },
-        { "id": 4643677, "name": "wtwh", "age": 2578, "boarded": false }
+        { "id": 21351251, "name": "aqher", "age": 27, "boarded": false },
+        { "id": 12412, "name": "asd", "age": 12415, "boarded": false },
+        { "id": 1616145, "name": "asdfafg", "age": 145, "boarded": false },
+        { "id": 12412412, "name": "qweq", "age": 51516, "boarded": true },
+        { "id": 234234, "name": "sg", "age": 32, "boarded": false },
+        { "id": 14234, "name": "Yo", "age": 21, "boarded": false }
       ],
       "boardingQueue": []
     },
     {
       "flightNumber": 24582,
-      "route": "paris",
+      "origin": "San Jose",
+      "destination": "Paris",
       "planeType": "Airbus A320",
       "maximumCapacity": 15,
-      "status": "disponible",
+      "fuel": 30,
+      "status": "Programado",
       "seats": [
+        { "id": 2535, "name": "aggg", "age": 12, "boarded": true }
       ],
       "boardingQueue": []
     },
     {
       "flightNumber": 35693,
-      "route": "madrid",
+      "origin": "San Jose",
+      "destination": "Madrid",
       "planeType": "Boeing 787",
       "maximumCapacity": 20,
-      "status": "disponible",
+      "fuel": 60,
+      "status": "Programado",
       "seats": [
-      ],
-      "boardingQueue": []
-    },
-    {
-      "flightNumber": 46714,
-      "route": "londres",
-      "planeType": "Airbus A330",
-      "maximumCapacity": 12,
-      "status": "disponible",
-      "seats": [
-        { "id": 21351251, "name": "aqher", "age": 27, "boarded": false },
-        { "id": 12412, "name": "asd", "age": 12415, "boarded": false },
-        { "id": 1616145, "name": "asdfafg", "age": 145, "boarded": false },
-        { "id": 12412412, "name": "qweq", "age": 51516, "boarded": false },
-        { "id": 234234, "name": "sg", "age": 32, "boarded": false }
+        { "id": 1414, "name": "ABD", "age": 12, "boarded": true },
+        { "id": 123, "name": "Geovanni", "age": 14, "boarded": true },
+        { "id": 151, "name": "Yiyo", "age": 1415, "boarded": true },
+        { "id": 142, "name": "yo", "age": 14, "boarded": true }
       ],
       "boardingQueue": []
     }
