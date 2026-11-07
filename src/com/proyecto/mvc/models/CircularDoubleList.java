@@ -66,6 +66,16 @@ public class CircularDoubleList {
 		return flag;
 	}
 	
+	
+	
+	public Node getHead() {
+		return head;
+	}
+
+	public void setHead(Node head) {
+		this.head = head;
+	}
+
 	public Flight getNext() {// se va moviendo hacia adelante cada que se llame este metodo
 		
 		if(current == null) return null;
@@ -112,6 +122,8 @@ public class CircularDoubleList {
 	}
 	
 	
+	
+	
 	public void prioritizeFlights() {
 		
 		if(isEmpty()) return;
@@ -137,7 +149,7 @@ public class CircularDoubleList {
 	private Node partition(Node low, Node high) {
 		
 		Flight pivot = high.getFlight();
-		Node i = low.getPrevious();
+		Node i = null;
 		
 		for(Node j = low; j!=high; j = j.getNext()) {
 		
@@ -205,6 +217,37 @@ public class CircularDoubleList {
 	    }
 
 	    return result;
+	}
+	
+	public boolean existPassenger(Passenger passenger, DoubleListPassenger list) {
+		
+		boolean flag = false;
+		NodePassenger aux = list.getFirst();
+		
+		while(aux != null) {
+			
+			if(passenger.getIdP() == aux.getPassenger().getIdP()) {
+				flag = true;
+			}
+			
+			
+			aux = aux.getNext();
+		}
+		
+		return flag;
+	}
+	
+	public void print() {
+		
+		Node aux = this.head;
+		
+		do {
+			
+			System.out.println("vuelo: "+aux.getFlight().getFlightNumber()+"ocupacion: "+aux.getFlight().getOccupancyPercentage());
+			
+			aux = aux.getNext();
+		} while (aux != this.head);
+		
 	}
 	
 }

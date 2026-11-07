@@ -62,14 +62,20 @@ public class ReservationController {
 				
 				boolean added = flight.getSeats().addPassenger(passenger);
 				
-				if(added) {
-					tripLogic.push(tripStack, new Trip(flight, passenger));
-					flightD.saveFlights(flights, flightsFile);
-					flightD.saveTrips(tripStack, tripsFile);
-					index();
+				if(flights.existPassenger(passenger, flights.getHead().getFlight().getSeats())) {
+					JOptionPane.showMessageDialog(null, "El pasajero ya existe en este vuelo");
 				}else {
-					JOptionPane.showMessageDialog(null, "El vuelo no tiene asientos disponibles");
+					if(added) {
+						tripLogic.push(tripStack, new Trip(flight, passenger));
+						flightD.saveFlights(flights, flightsFile);
+						flightD.saveTrips(tripStack, tripsFile);
+						index();
+					}else {
+						JOptionPane.showMessageDialog(null, "El vuelo no tiene asientos disponibles");
+					}
 				}
+				
+				
 				
 			}catch(NumberFormatException ex) {
 				JOptionPane.showMessageDialog(null, "Identificacion y edad deben ser numeros");
