@@ -34,7 +34,9 @@ public class PrincipalController {
 	private String flightsFile;
 	private String tripsFile;
 	private String airportsFile;
-
+	private LandingController landingController;
+	
+	
 	public PrincipalController() {
 
 		vp = new ViewPrincipal();
@@ -58,6 +60,8 @@ public class PrincipalController {
 		avlController = new AVLController(vp, avl, flightLogic);
 		airportController = new AirportController(vp, graph, airportD, airportsFile);
 		routeController = new RouteController(vp, graph);
+		landingController = new LandingController(vp, flightLogic, graph);
+		
 	}
 
 	public void init() {
@@ -87,7 +91,9 @@ public class PrincipalController {
 		vp.btnAVL.addActionListener(e -> { avlController.index(); });
 		vp.btnAirports.addActionListener(e -> { airportController.index(); });
 		vp.btnRoutes.addActionListener(e -> { routeController.index(); });
-
+		vp.btnLanding.addActionListener(e->{landingController.index();});
+		vp.btnBoardingGates.addActionListener(e->{boardingController.index();});
+		
 		vp.init();
 	}
 

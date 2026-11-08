@@ -26,6 +26,8 @@ public class ViewPrincipal extends JFrame {
 	public JButton btnRoutes;
 	public JLabel lblTitle;
 	public JPanel contentPanel;
+	public JButton btnLanding;
+	public JButton btnBoardingGates;
 
 	
 	public ViewPrincipal() {
@@ -41,7 +43,7 @@ public class ViewPrincipal extends JFrame {
 		
 		JPanel bottomsPanel = new JPanel();
 		panelMenu.add(bottomsPanel);
-		bottomsPanel.setLayout(new GridLayout(7, 1, 0, 5));
+		bottomsPanel.setLayout(new GridLayout(9, 1, 0, 5));
 		
 		btnFlights = new JButton("Vuelos");
 		bottomsPanel.add(btnFlights);
@@ -61,8 +63,14 @@ public class ViewPrincipal extends JFrame {
 		btnAirports = new JButton("Aeropuertos");
 		bottomsPanel.add(btnAirports);
 		
+		btnLanding = new JButton("Priorizar Aterrizaje");
+		bottomsPanel.add(btnLanding);
+		
 		btnRoutes = new JButton("Rutas");
 		bottomsPanel.add(btnRoutes);
+		
+		btnBoardingGates = new JButton("Puertas de embarque");
+		bottomsPanel.add(btnBoardingGates);
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
