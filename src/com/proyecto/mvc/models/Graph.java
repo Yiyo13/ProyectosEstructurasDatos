@@ -227,7 +227,16 @@ public class Graph {
 		}
 		return vertex.getDistance() + " km";
 	}
-
+	public int shortestDistance(String origin, String destination) {
+		if(dijkstra(origin) == null) {
+			return -1;
+		}
+		Vertex destinationVertex = findVertex(destination);
+		if(destinationVertex == null || destinationVertex.getDistance() == Integer.MAX_VALUE) {
+			return -1;
+		}
+		return destinationVertex.getDistance();
+	}
 	private String showPending() {// tentativas sin visitar
 		String text = "";
 		VertexNode aux = this.start;

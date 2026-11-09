@@ -6,6 +6,9 @@ public class Vertex {
 	private boolean isVisited;
 	private int distance;
 	private Vertex last;
+	private FlightList inbound;
+	private FlightList pending;
+	private FlightList landed;
 	
 	public Vertex(String name) {
 		this.name = name;
@@ -13,6 +16,9 @@ public class Vertex {
 		this.distance = Integer.MAX_VALUE;
 		this.isVisited = false;
 		this.last = null;
+		this.inbound = new FlightList();
+		this.pending = new FlightList();
+		this.landed = new FlightList();
 	}
 	
 	public boolean isVisited() {
@@ -44,6 +50,23 @@ public class Vertex {
 	}
 	public EdgeNode getAdjacencyList() {
 		return this.adjacencylist;
+	}
+	public FlightList getInbound() {
+		return inbound;
+	}
+
+	public FlightList getPending() {
+		return pending;
+	}
+
+	public FlightList getLanded() {
+		return landed;
+	}
+
+	public void clearFlights() {
+		inbound.clear();
+		pending.clear();
+		landed.clear();
 	}
 	
 	public void addAdjacencyVertex(Vertex destination, int weight) {

@@ -19,6 +19,8 @@ public class Flight {
 	private String status;
 	private DoubleListPassenger seats;//asientos
 	private BoardingQueue boardingQueue;
+	private int totalSeconds;// duracion de la simulacion
+	private int remainingSeconds;
 
 	public Flight(int flightNumber, String origin, String destination, String planeType, int maximumCapacity, int fuel, String status) {
 
@@ -133,7 +135,38 @@ public class Flight {
 	public BoardingQueue getBoardingQueue() {
 		return boardingQueue;
 	}
+	public void startFlight(int distanceKm) {//  redondeo hacia arriba
+		this.totalSeconds = (distanceKm + 99) / 100;
+		this.remainingSeconds = this.totalSeconds;
+		this.status = IN_TRANSIT;
+	}
 
+	public boolean advance() {// avanza 1 s, true si acaba de llegar
+		if (!IN_TRANSIT.equals(status)) {
+			return false;
+		}
+		remainingSeconds--;
+		if (remainingSeconds <= 0) {
+			remainingSeconds = 0;
+			status = PENDING;
+			return true;
+		}
+		return false;
+	}
+
+	public int getRemainingSeconds() {
+		return remainingSeconds;
+	}
+
+	public int getTotalSeconds() {
+		return totalSeconds;
+	}
+
+	public void resetSimulation() {
+		this.status = SCHEDULED;
+		this.totalSeconds = 0;
+		this.remainingSeconds = 0;
+	}
 	@Override
 	public String toString() {
 		return "Vuelo " + flightNumber + "\n" +
