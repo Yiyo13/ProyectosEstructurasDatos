@@ -2,13 +2,13 @@ package com.proyecto.mvc.controllers;
 
 import javax.swing.JOptionPane;
 
-import com.proyecto.mvc.models.CircularDoubleList;
+import com.proyecto.mvc.models.FlightCircularList;
 import com.proyecto.mvc.models.Flight;
 import com.proyecto.mvc.models.FlightData;
 import com.proyecto.mvc.models.Passenger;
 import com.proyecto.mvc.models.Trip;
 import com.proyecto.mvc.models.TripLogic;
-import com.proyecto.mvc.models.TripStack;
+import com.proyecto.mvc.models.Stack;
 import com.proyecto.mvc.views.ViewPrincipal;
 import com.proyecto.mvc.views.reservations.ReservationForm;
 import com.proyecto.mvc.views.reservations.ReservationIndex;
@@ -16,15 +16,15 @@ import com.proyecto.mvc.views.reservations.ReservationIndex;
 public class ReservationController {
 
 	private ViewPrincipal vp;
-	private CircularDoubleList flights;
-	private TripStack tripStack;
+	private FlightCircularList flights;
+	private Stack<Trip> tripStack;
 	private TripLogic tripLogic;
 	private FlightData flightD;
 	private String flightsFile;
 	private String tripsFile;
 
-	public ReservationController(ViewPrincipal vp, CircularDoubleList flights,
-			TripStack tripStack, TripLogic tripLogic, FlightData flightD, String flightsFile, String tripsFile) {
+	public ReservationController(ViewPrincipal vp, FlightCircularList flights,
+			Stack<Trip> tripStack, TripLogic tripLogic, FlightData flightD, String flightsFile, String tripsFile) {
 		this.vp = vp;
 		this.flights = flights;
 		this.tripStack = tripStack;

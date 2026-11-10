@@ -1,137 +1,51 @@
 package com.proyecto.mvc.models;
 
-public class DoubleListPassenger {
-	private NodePassenger first;
-	private NodePassenger last;
+// Lista doble de pasajeros (asientos de un vuelo).
+// La estructura es DoubleList<Passenger>; aqui solo va lo propio de los asientos:
+// la capacidad maxima, el orden alfabetico y el orden por edad.
+public class DoubleListPassenger extends DoubleList<Passenger> {
+
 	private int maxCapFlight;
-	private int currentCap;
-	private NodePassenger current;
 
 	public DoubleListPassenger() {
-
+		this(0);
 	}
 
-	public DoubleListPassenger( int maxCapFlight) {
-
-		this.first = null;
-		this.last = null;
+	public DoubleListPassenger(int maxCapFlight) {
+		super();
 		this.maxCapFlight = maxCapFlight;
-		this.currentCap = 0;
-	}
-	public boolean isEmpty() {
-		return this.first == null;
 	}
 
+	// agrega en orden alfabetico por nombre, si hay campo
 	public boolean addPassenger(Passenger passenger) {
-		if(currentCap >= maxCapFlight) {
+
+		if (size() >= maxCapFlight) {
 			return false;
 		}
-		NodePassenger node = new NodePassenger(passenger);
-		if(isEmpty()) {
-			first = node;
-			last = node;
-			currentCap++;
-			this.current = node;
-			return true;
 
-		}
-		NodePassenger aux = first;
-		while(aux != null && aux.getPassenger().getNameP()
-				.compareToIgnoreCase(passenger.getNameP())<0){
-			aux = aux.getNext();
-		}
-		if(aux == null) {
-			node.setPrev(last);
-			last.setNext(node);
-			last = node;
-		}else if(aux == first) {
-			node.setNext(first);
-			first.setPrev(node);
-			first = node;
-
-		}else {
-			NodePassenger previous = aux.getPrev();
-			node.setPrev(previous);
-			node.setNext(aux);
-			previous.setNext(node);
-			aux.setPrev(node);
-
-
-		}
-		currentCap++;
-
+		addSorted(passenger, (a, b) -> a.getNameP().compareToIgnoreCase(b.getNameP()));
 		return true;
 	}
 
 	public void sortByAge(boolean ascending) {
 
-		if (isEmpty()) {
-			return;
-		}
-
-		for (NodePassenger i = first; i != null; i = i.getNext()) {
-
-			for (NodePassenger j = i.getNext(); j != null; j = j.getNext()) {
-
-				boolean shouldSwap;
-
-				if (ascending) {
-					shouldSwap = i.getPassenger().getAgeP() > j.getPassenger().getAgeP();
-				} else {
-					shouldSwap = i.getPassenger().getAgeP() < j.getPassenger().getAgeP();
-				}
-
-				if (shouldSwap) {
-					swap(i, j);
-				}
-			}
+		if (ascending) {
+			sort((a, b) -> Integer.compare(a.getAgeP(), b.getAgeP()));
+		} else {
+			sort((a, b) -> Integer.compare(b.getAgeP(), a.getAgeP()));
 		}
 	}
-	private void swap(NodePassenger a, NodePassenger b) {
 
-		Passenger temp = a.getPassenger();
-		a.setPassenger(b.getPassenger());
-		b.setPassenger(temp);
-	}
-
-	public NodePassenger getFirst() {
-		return first;
+	public Passenger findById(int id) {
+		return find(p -> p.getIdP() == id);
 	}
 
 	public void setMaxCapFlight(int maxCapFlight) {
 		this.maxCapFlight = maxCapFlight;
 	}
 
-	public NodePassenger getLast() {
-		return last;
-	}
-
-	public Passenger getPrevious() {
-
-		if(current == null) return null;
-
-		current = current.getPrev();
-		return current.getPassenger();
-	}
-
-	public Passenger getNext() {//
-
-		if(current == null) return null;
-
-	current = current.getNext();
-	return current.getPassenger();
-	}
-
-	public Passenger getCurrent() {
-
-		if(current == null) return null;
-
-
-		return current.getPassenger();
-	}
-
 	public int getCurrentCapacity() {
-		return this.currentCap;
+		return size();
 	}
 
 	@Override
@@ -142,32 +56,18 @@ public class DoubleListPassenger {
 		}
 
 		String resultado = "";
-		NodePassenger aux = first;
+		Node<Passenger> aux = getFirst();
 
 		while (aux != null) {
-			resultado += aux.getPassenger().toString() + "\n";
+			resultado += aux.getData().toString() + "\n";
 			aux = aux.getNext();
 		}
 
 		return resultado;
 	}
-	public boolean checkDuplicatesPassenger(DoubleListPassenger passenger,int id) {
-		
-		if(!isEmpty()){
-			NodePassenger current = passenger.first;
-			
-			while(current != null) {
-				if(current.getPassenger().getIdP() == id) {
-					return true;	
-					
-				}
-				current = current.getNext();
-			}
-			
-		}
 
-
-		return false;
+	// se deja la misma firma que en el Proyecto 1 para no romper a quien la llama
+	public boolean checkDuplicatesPassenger(DoubleListPassenger passengers, int id) {
+		return passengers.findById(id) != null;
 	}
-
 }

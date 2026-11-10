@@ -2,7 +2,7 @@ package com.proyecto.mvc.controllers;
 
 import javax.swing.JOptionPane;
 
-import com.proyecto.mvc.models.CircularDoubleList;
+import com.proyecto.mvc.models.FlightCircularList;
 import com.proyecto.mvc.models.Flight;
 import com.proyecto.mvc.models.FlightLogic;
 import com.proyecto.mvc.models.Graph;
@@ -13,11 +13,11 @@ import com.proyecto.mvc.views.flights.FlightIndex;
 public class FlightController {
 
 	private ViewPrincipal vp;
-	private CircularDoubleList flights;
+	private FlightCircularList flights;
 	private FlightLogic flightLogic;
 	private Graph graph;
 
-	public FlightController(ViewPrincipal vp, CircularDoubleList flights, FlightLogic flightLogic, Graph graph) {
+	public FlightController(ViewPrincipal vp, FlightCircularList flights, FlightLogic flightLogic, Graph graph) {
 		this.vp = vp;
 		this.flights = flights;
 		this.flightLogic = flightLogic;
@@ -188,7 +188,7 @@ public class FlightController {
 			}
 
 			flights.prioritizeFlights();
-			flights.selectFlight(flights.getHead().getFlight().getFlightNumber());
+			flights.selectFlight(flights.getHead().getData().getFlightNumber());
 			show(v, flights.getCurrent());
 		});
 

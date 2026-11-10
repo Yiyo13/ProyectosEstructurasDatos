@@ -18,7 +18,7 @@ public class Flight {
 	private String size;
 	private String status;
 	private DoubleListPassenger seats;//asientos
-	private BoardingQueue boardingQueue;
+	private Queue<Passenger> boardingQueue;
 	private int totalSeconds;// duracion de la simulacion
 	private int remainingSeconds;
 
@@ -34,7 +34,7 @@ public class Flight {
 		this.status = status;
 
 		this.seats = new DoubleListPassenger(maximumCapacity);
-		this.boardingQueue = new BoardingQueue();
+		this.boardingQueue = new Queue<Passenger>();
 	}
 
 	public static String sizeOf(String planeType) {// tamano segun avion
@@ -132,7 +132,7 @@ public class Flight {
 		return this.maximumCapacity - this.seats.getCurrentCapacity();
 	}
 
-	public BoardingQueue getBoardingQueue() {
+	public Queue<Passenger> getBoardingQueue() {
 		return boardingQueue;
 	}
 	public void startFlight(int distanceKm) {//  redondeo hacia arriba

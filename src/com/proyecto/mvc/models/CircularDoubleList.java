@@ -1,273 +1,212 @@
 package com.proyecto.mvc.models;
 
-public class CircularDoubleList {
+import java.util.Comparator;
+import java.util.function.Predicate;
 
-	private Node head;
-	private Node current;//nodo actual
+// Lista doblemente enlazada circular generica.
+// No sabe nada de vuelos: para buscar recibe un Predicate (una condicion)
+// y para ordenar recibe un Comparator (como comparar dos elementos).
+// FlightCircularList la usa con T = Flight.
+public class CircularDoubleList<T> {
 
-
+	private Node<T> head;
+	private Node<T> current;// nodo actual (para navegar con anterior/siguiente)
+	private int size;
 
 	public CircularDoubleList() {
 		this.head = null;
-
+		this.current = null;
+		this.size = 0;
 	}
 
-	public  boolean isEmpty() {
-		return this.head==null;
-	}
-	
-	public Node getHead() {
-	    return head;
+	public boolean isEmpty() {
+		return this.head == null;
 	}
 
-	public void setHead(Node head) {
-	    this.head = head;
+	public int size() {
+		return size;
 	}
 
-	public void add(Flight flight) {
+	public Node<T> getHead() {
+		return head;
+	}
 
-		Node node = new Node(flight);
+	// agrega al final (antes de la cabeza, porque es circular)
+	public void add(T data) {
 
-		if(isEmpty()) {
+		Node<T> node = new Node<>(data);
 
+		if (isEmpty()) {
 			this.head = node;
 			this.head.setPrevious(node);
 			this.head.setNext(node);
 			this.current = node;
-		}else {
+		} else {
+			Node<T> last = this.head.getPrevious();// en una circular doble el ultimo es head.previous
 
-			Node aux = this.head;
-
-			while(aux.getNext() != this.head) {//se pregunta si el siguiente de donde apunta aux es diferente a la cabeza
-
-				aux = aux.getNext();
-			}
-
-			aux.setNext(node);
-			node.setPrevious(aux);
+			last.setNext(node);
+			node.setPrevious(last);
 			node.setNext(this.head);
-
 			this.head.setPrevious(node);
 		}
+		size++;
 	}
 
-	public boolean checkDuplicateFlightNumber(int flightNumber) {
+	// devuelve el nodo del primer elemento que cumpla la condicion, o null
+	private Node<T> findNode(Predicate<T> condition) {
 
-		boolean flag = false;
+		if (isEmpty()) return null;
 
-		if(!isEmpty()) {
+		Node<T> aux = this.head;
 
-			Node aux = this.head;
+		do {
+			if (condition.test(aux.getData())) {
+				return aux;
+			}
+			aux = aux.getNext();
+		} while (aux != this.head);
 
-			do {
+		return null;
+	}
 
-				if(aux.getFlight().getFlightNumber() == flightNumber) {
-					flag = true;
-				}
+	public T find(Predicate<T> condition) {
+		Node<T> node = findNode(condition);
+		return node == null ? null : node.getData();
+	}
 
-				aux = aux.getNext();
+	public boolean contains(Predicate<T> condition) {
+		return findNode(condition) != null;
+	}
 
-			} while (aux != this.head);
+	// elimina el primer elemento que cumpla la condicion
+	public boolean remove(Predicate<T> condition) {
 
+		Node<T> aux = findNode(condition);
+
+		if (aux == null) return false;
+
+		if (aux.getNext() == aux) {// solo habia uno
+			this.head = null;
+			this.current = null;
+			size = 0;
+			return true;
 		}
 
-		return flag;
+		aux.getPrevious().setNext(aux.getNext());
+		aux.getNext().setPrevious(aux.getPrevious());
+
+		if (aux == this.head) {
+			this.head = aux.getNext();
+		}
+		if (aux == this.current) {
+			this.current = aux.getNext();
+		}
+		size--;
+		return true;
 	}
 
-	public boolean remove(int flightNumber) {
+	// mueve "current" directo al elemento que cumpla la condicion
+	public boolean select(Predicate<T> condition) {
 
-		if(isEmpty()) return false;
+		Node<T> node = findNode(condition);
 
-		Node aux = this.head;
+		if (node == null) return false;
 
-		do {
-
-			if(aux.getFlight().getFlightNumber() == flightNumber) {
-
-				if(aux.getNext() == aux) {// solo uno
-					this.head = null;
-					this.current = null;
-					return true;
-				}
-
-				aux.getPrevious().setNext(aux.getNext());
-				aux.getNext().setPrevious(aux.getPrevious());
-
-				if(aux == this.head) {
-					this.head = aux.getNext();
-				}
-				if(aux == this.current) {
-					this.current = aux.getNext();
-				}
-				return true;
-			}
-
-			aux = aux.getNext();
-
-		} while (aux != this.head);
-
-		return false;
+		this.current = node;
+		return true;
 	}
 
-	public Flight getNext() {// se va moviendo hacia adelante cada que se llame este metodo
+	public T getNext() {// avanza "current" y devuelve el dato
 
-		if(current == null) return null;
+		if (current == null) return null;
 
 		current = current.getNext();
-
-		return current.getFlight();
+		return current.getData();
 	}
 
-	public Flight getPrevious() {//se va moviendo hacia atras cada que se llame este metodo
+	public T getPrevious() {// retrocede "current" y devuelve el dato
 
-		if(current == null) return null;
+		if (current == null) return null;
 
 		current = current.getPrevious();
-
-		return current.getFlight();
+		return current.getData();
 	}
 
-	public Flight getCurrent() {//se obtiene el nodo actual, para que cuando se inicia el programa salga algun nodo
+	public T getCurrent() {
 
-		if(current == null) return null;
+		if (current == null) return null;
 
-		return current.getFlight();
+		return current.getData();
 	}
 
-	public boolean selectFlight(int flightNumber) {// mueve "current" directo al vuelo indicado
+	// llena el arreglo recibido con los elementos, desde la cabeza.
+	// Se pide el arreglo afuera porque en Java no se puede hacer "new T[n]".
+	public T[] toArray(T[] result) {
 
-		if(isEmpty()) return false;
+		if (isEmpty()) return result;
 
-		Node aux = this.head;
-
-		do {
-
-			if(aux.getFlight().getFlightNumber() == flightNumber) {
-				this.current = aux;
-				return true;
-			}
-
+		Node<T> aux = this.head;
+		for (int i = 0; i < result.length && i < size; i++) {
+			result[i] = aux.getData();
 			aux = aux.getNext();
-
-		} while (aux != this.head);
-
-		return false;
+		}
+		return result;
 	}
 
+	// ---------------- QuickSort sobre los nodos ----------------
+	// "goesFirst" decide el orden: si goesFirst.compare(a, b) < 0, a va antes que b.
 
-	public void prioritizeFlights() {
+	public void sort(Comparator<T> goesFirst) {
 
-		if(isEmpty()) return;
+		if (isEmpty()) return;
 
-		Node last = this.head.getPrevious();
+		// se "abre" el circulo para que el QuickSort trabaje como en una lista doble normal
+		Node<T> last = this.head.getPrevious();
 
 		last.setNext(null);
 		this.head.setPrevious(null);
 
-		quickSort(this.head, last);
+		quickSort(this.head, last, goesFirst);
 
+		// se vuelve a cerrar el circulo
 		this.head.setPrevious(last);
 		last.setNext(this.head);
-
 	}
 
-	public void quickSort(Node low, Node high) {
+	private void quickSort(Node<T> low, Node<T> high, Comparator<T> goesFirst) {
 
-		if(high != null && low != high && low != high.getNext()) {
+		if (high != null && low != high && low != high.getNext()) {
 
-			Node pivot = partition(low,high);
+			Node<T> pivot = partition(low, high, goesFirst);
 
-			quickSort(low, pivot.getPrevious());
-			quickSort(pivot.getNext(), high);
+			quickSort(low, pivot.getPrevious(), goesFirst);
+			quickSort(pivot.getNext(), high, goesFirst);
 		}
-
-
 	}
 
-	private Node partition(Node low, Node high) {
+	private Node<T> partition(Node<T> low, Node<T> high, Comparator<T> goesFirst) {
 
-		Flight pivot = high.getFlight();
-		Node i = low.getPrevious();
+		T pivot = high.getData();
+		Node<T> i = low.getPrevious();
 
-		for(Node j = low; j!=high; j = j.getNext()) {
+		for (Node<T> j = low; j != high; j = j.getNext()) {
 
-			if(compare(j.getFlight(), pivot)) {
+			if (goesFirst.compare(j.getData(), pivot) < 0) {
 
-				if(i == null) {
-					i = low;
-				}else {
-					i = i.getNext();
-				}
-
-				swap(i ,j);
+				i = (i == null) ? low : i.getNext();
+				swap(i, j);
 			}
-
 		}
 
-		if(i == null) {
-			i = low;
-		}else {
-			i = i.getNext();
-		}
-
-		swap(i ,high);
+		i = (i == null) ? low : i.getNext();
+		swap(i, high);
 
 		return i;
 	}
 
-	private boolean compare(Flight a, Flight b) {
-
-		double occupancyA = a.getOccupancyPercentage();
-		double occupancyB = b.getOccupancyPercentage();
-
-		if(occupancyA != occupancyB) {
-			return occupancyA > occupancyB;
-		}
-
-		return a.getFlightNumber() < b.getFlightNumber();
+	private void swap(Node<T> a, Node<T> b) {// se intercambian los datos, no los nodos
+		T temp = a.getData();
+		a.setData(b.getData());
+		b.setData(temp);
 	}
-
-	private void swap(Node a, Node b) {
-
-		Flight temp = a.getFlight();
-		a.setFlight(b.getFlight());
-		b.setFlight(temp);
-	}
-	public Flight[] getAllFlights() {
-
-		if (isEmpty()) {
-			return new Flight[0];
-		}
-
-		int count = 0;
-		Node aux = this.head;
-		do {
-			count++;
-			aux = aux.getNext();
-		} while (aux != this.head);
-
-
-		Flight[] result = new Flight[count];
-		aux = this.head;
-		for (int i = 0; i < count; i++) {
-			result[i] = aux.getFlight();
-			aux = aux.getNext();
-		}
-
-		return result;
-	}
-
-	public void print() {
-
-		Node aux = this.head;
-
-		do {
-
-			System.out.println("vuelo: "+aux.getFlight().getFlightNumber()+"ocupacion: "+aux.getFlight().getOccupancyPercentage());
-
-			aux = aux.getNext();
-		} while (aux != this.head);
-
-	}
-
-}
+}

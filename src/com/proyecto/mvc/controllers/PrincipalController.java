@@ -3,13 +3,14 @@ package com.proyecto.mvc.controllers;
 import com.proyecto.mvc.models.AVLTree;
 import com.proyecto.mvc.models.AirportData;
 import com.proyecto.mvc.models.BoardingLogic;
-import com.proyecto.mvc.models.CircularDoubleList;
+import com.proyecto.mvc.models.FlightCircularList;
 import com.proyecto.mvc.models.Flight;
 import com.proyecto.mvc.models.FlightData;
 import com.proyecto.mvc.models.FlightLogic;
 import com.proyecto.mvc.models.Graph;
 import com.proyecto.mvc.models.TripLogic;
-import com.proyecto.mvc.models.TripStack;
+import com.proyecto.mvc.models.Stack;
+import com.proyecto.mvc.models.Trip;
 import com.proyecto.mvc.views.ViewPrincipal;
 
 public class PrincipalController {
@@ -22,10 +23,10 @@ public class PrincipalController {
 	private AirportController airportController;
 	private RouteController routeController;
 	private ViewPrincipal vp;
-	private CircularDoubleList flights;
+	private FlightCircularList flights;
 	private AVLTree avl;
 	private Graph graph;
-	private TripStack tripStack;
+	private Stack<Trip> tripStack;
 	private TripLogic tripLogic;
 	private BoardingLogic boardingLogic;
 	private FlightLogic flightLogic;
@@ -40,10 +41,10 @@ public class PrincipalController {
 	public PrincipalController() {
 
 		vp = new ViewPrincipal();
-		flights = new CircularDoubleList();
+		flights = new FlightCircularList();
 		avl = new AVLTree();
 		graph = new Graph();
-		tripStack = new TripStack();
+		tripStack = new Stack<Trip>();
 		tripLogic = new TripLogic();
 		boardingLogic = new BoardingLogic();
 		flightD = new FlightData();

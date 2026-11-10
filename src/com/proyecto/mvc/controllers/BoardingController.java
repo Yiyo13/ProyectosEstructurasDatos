@@ -3,10 +3,9 @@ package com.proyecto.mvc.controllers;
 import javax.swing.JOptionPane;
 
 import com.proyecto.mvc.models.BoardingLogic;
-import com.proyecto.mvc.models.CircularDoubleList;
+import com.proyecto.mvc.models.FlightCircularList;
 import com.proyecto.mvc.models.Flight;
 import com.proyecto.mvc.models.FlightData;
-import com.proyecto.mvc.models.NodePassenger;
 import com.proyecto.mvc.models.Passenger;
 import com.proyecto.mvc.views.ViewPrincipal;
 import com.proyecto.mvc.views.boarding.BoardingIndex;
@@ -14,12 +13,12 @@ import com.proyecto.mvc.views.boarding.BoardingIndex;
 public class BoardingController {
 
 	private ViewPrincipal vp;
-	private CircularDoubleList flights;
+	private FlightCircularList flights;
 	private BoardingLogic boardingLogic;
 	private FlightData flightD;
 	private String flightsFile;
 
-	public BoardingController(ViewPrincipal vp, CircularDoubleList flights, BoardingLogic boardingLogic,
+	public BoardingController(ViewPrincipal vp, FlightCircularList flights, BoardingLogic boardingLogic,
 			FlightData flightD, String flightsFile) {
 		this.vp = vp;
 		this.flights = flights;
@@ -89,18 +88,7 @@ public class BoardingController {
 
 	private Passenger findPassenger(Flight flight, int id) {
 
-		NodePassenger aux = flight.getSeats().getFirst();
-
-		while (aux != null) {
-
-			if (aux.getPassenger().getIdP() == id) {
-				return aux.getPassenger();
-			}
-
-			aux = aux.getNext();
-		}
-
-		return null;
+		return flight.getSeats().findById(id);
 	}
 
 }

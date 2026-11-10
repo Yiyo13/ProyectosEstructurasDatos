@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class FlightData {
 
-	public void saveFlights(CircularDoubleList flights, String path) {
+	public void saveFlights(FlightCircularList flights, String path) {
 
 		try (FileWriter writer = new FileWriter(path)) {
 
@@ -30,14 +30,14 @@ public class FlightData {
 				writer.write("      \"status\": \"" + flight.isStatus() + "\",\n");
 				writer.write("      \"seats\": [\n");
 
-				NodePassenger aux = flight.getSeats().getFirst();
+				Node<Passenger> aux = flight.getSeats().getFirst();
 
 				while (aux != null) {
 
-					writer.write("        { \"id\": " + aux.getPassenger().getIdP()
-							+ ", \"name\": \"" + aux.getPassenger().getNameP()
-							+ "\", \"age\": " + aux.getPassenger().getAgeP()
-							+ ", \"boarded\": " + aux.getPassenger().isBoarded() + " }");
+					writer.write("        { \"id\": " + aux.getData().getIdP()
+							+ ", \"name\": \"" + aux.getData().getNameP()
+							+ "\", \"age\": " + aux.getData().getAgeP()
+							+ ", \"boarded\": " + aux.getData().isBoarded() + " }");
 
 					aux = aux.getNext();
 
@@ -51,11 +51,11 @@ public class FlightData {
 				writer.write("      ],\n");
 				writer.write("      \"boardingQueue\": [");
 
-				NodeBoarding auxB = flight.getBoardingQueue().getFirst();
+				Node<Passenger> auxB = flight.getBoardingQueue().getFirst();
 
 				while (auxB != null) {
 
-					writer.write(String.valueOf(auxB.getPassenger().getIdP()));
+					writer.write(String.valueOf(auxB.getData().getIdP()));
 
 					auxB = auxB.getNext();
 
@@ -82,7 +82,7 @@ public class FlightData {
 		}
 	}
 
-	public void loadFlights(CircularDoubleList flights, String path) {
+	public void loadFlights(FlightCircularList flights, String path) {
 
 		try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
 
@@ -167,19 +167,19 @@ public class FlightData {
 		}
 	}
 
-	public void saveTrips(TripStack tripStack, String path) {
+	public void saveTrips(Stack<Trip> tripStack, String path) {
 
 		try (FileWriter writer = new FileWriter(path)) {
 
 			writer.write("{\n");
 			writer.write("  \"trips\": [\n");
 
-			NodeTrip aux = tripStack.getTop();
+			Node<Trip> aux = tripStack.getTop();
 
 			while (aux != null) {
 
-				writer.write("    { \"flightNumber\": " + aux.getTrip().getFlight().getFlightNumber()
-						+ ", \"passengerId\": " + aux.getTrip().getPassenger().getIdP() + " }");
+				writer.write("    { \"flightNumber\": " + aux.getData().getFlight().getFlightNumber()
+						+ ", \"passengerId\": " + aux.getData().getPassenger().getIdP() + " }");
 
 				aux = aux.getNext();
 
@@ -198,7 +198,7 @@ public class FlightData {
 		}
 	}
 
-	public void loadTrips(TripStack tripStack, TripLogic tripLogic, CircularDoubleList flights, String path) {
+	public void loadTrips(Stack<Trip> tripStack, TripLogic tripLogic, FlightCircularList flights, String path) {
 
 		try {
 
@@ -274,32 +274,11 @@ public class FlightData {
 
 	private Passenger findPassengerById(Flight flight, int id) {
 
-		NodePassenger aux = flight.getSeats().getFirst();
-
-		while (aux != null) {
-
-			if (aux.getPassenger().getIdP() == id) {
-				return aux.getPassenger();
-			}
-
-			aux = aux.getNext();
-		}
-
-		return null;
+		return flight.getSeats().findById(id);
 	}
 
-	private Flight findFlightByNumber(CircularDoubleList flights, int flightNumber) {
-
-		Flight[] allFlights = flights.getAllFlights();
-
-		for (int i = 0; i < allFlights.length; i++) {
-
-			if (allFlights[i].getFlightNumber() == flightNumber) {
-				return allFlights[i];
-			}
-		}
-
-		return null;
+	private Flight findFlightByNumber(FlightCircularList flights, int flightNumber) {
+		return flights.findFlight(flightNumber);
 	}
 
 	private String extractValue(String line) {

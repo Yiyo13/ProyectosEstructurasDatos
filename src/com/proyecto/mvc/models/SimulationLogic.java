@@ -2,12 +2,12 @@ package com.proyecto.mvc.models;
 
 public class SimulationLogic {
 
-	private CircularDoubleList flights;
+	private FlightCircularList flights;
 	private Graph graph;
 	private int elapsedSeconds;
 	private int skipped;
 
-	public SimulationLogic(CircularDoubleList flights, Graph graph) {
+	public SimulationLogic(FlightCircularList flights, Graph graph) {
 		this.flights = flights;
 		this.graph = graph;
 		this.elapsedSeconds = 0;

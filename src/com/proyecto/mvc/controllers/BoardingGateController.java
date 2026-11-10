@@ -3,7 +3,7 @@ package com.proyecto.mvc.controllers;
 import javax.swing.JOptionPane;
 
 
-import com.proyecto.mvc.models.CircularDoubleList;
+import com.proyecto.mvc.models.FlightCircularList;
 import com.proyecto.mvc.models.Flight;
 import com.proyecto.mvc.models.Gate;
 import com.proyecto.mvc.models.GateLogic;
@@ -13,10 +13,10 @@ import com.proyecto.mvc.views.gates.GateIndex;
 public class BoardingGateController {
 
 	private ViewPrincipal vp;
-	private CircularDoubleList flights;
+	private FlightCircularList flights;
 	private GateLogic gateLogic;
 
-	public BoardingGateController(ViewPrincipal vp, CircularDoubleList flights) {
+	public BoardingGateController(ViewPrincipal vp, FlightCircularList flights) {
 		this.vp = vp;
 		this.flights = flights;
 		this.gateLogic = new GateLogic();

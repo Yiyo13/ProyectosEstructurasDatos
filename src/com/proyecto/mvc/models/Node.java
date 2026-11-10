@@ -1,42 +1,42 @@
 package com.proyecto.mvc.models;
 
-public class Node {
+// Nodo generico: sirve para cualquier tipo de dato (Flight, Passenger, Trip...).
+// T es el tipo del dato que guarda el nodo, se decide al crearlo: new Node<Flight>(vuelo).
+// Las estructuras simples (pila, cola, lista simple) solo usan "next";
+// las dobles (lista doble y circular doble) usan "next" y "previous".
+public class Node<T> {
 
-	public Node next;
-	public  Node previous;
-	public Flight flight;
-	
-	public Node(Flight flight) {
-		
-		this.flight = flight;
+	private T data;
+	private Node<T> next;
+	private Node<T> previous;
+
+	public Node(T data) {
+		this.data = data;
 		this.next = null;
 		this.previous = null;
 	}
 
-	public Node getNext() {
+	public T getData() {
+		return data;
+	}
+
+	public void setData(T data) {
+		this.data = data;
+	}
+
+	public Node<T> getNext() {
 		return next;
 	}
 
-	public void setNext(Node next) {
+	public void setNext(Node<T> next) {
 		this.next = next;
 	}
 
-	public Node getPrevious() {
+	public Node<T> getPrevious() {
 		return previous;
 	}
 
-	public void setPrevious(Node previous) {
+	public void setPrevious(Node<T> previous) {
 		this.previous = previous;
 	}
-
-	public Flight getFlight() {
-		return flight;
-	}
-
-	public void setFlight(Flight flight) {
-		this.flight = flight;
-	}
-	
-	
-	
 }

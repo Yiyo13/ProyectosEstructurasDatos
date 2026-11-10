@@ -2,12 +2,12 @@ package com.proyecto.mvc.models;
 
 public class FlightLogic {
 
-	private CircularDoubleList flights;
+	private FlightCircularList flights;
 	private AVLTree avl;
 	private FlightData flightD;
 	private String flightsFile;
 
-	public FlightLogic(CircularDoubleList flights, AVLTree avl, FlightData flightD, String flightsFile) {
+	public FlightLogic(FlightCircularList flights, AVLTree avl, FlightData flightD, String flightsFile) {
 		this.flights = flights;
 		this.avl = avl;
 		this.flightD = flightD;
