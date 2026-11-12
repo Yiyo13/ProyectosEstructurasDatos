@@ -164,6 +164,9 @@ public class FlightLogic {
 
 		return result;
 	}
+	public void save() {
+	    flightD.saveFlights(flights, flightsFile);
+	}
 	
 	
 }

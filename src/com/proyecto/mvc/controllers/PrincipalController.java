@@ -8,6 +8,7 @@ import com.proyecto.mvc.models.Flight;
 import com.proyecto.mvc.models.FlightData;
 import com.proyecto.mvc.models.FlightLogic;
 import com.proyecto.mvc.models.Graph;
+import com.proyecto.mvc.models.SimulationLogic;
 import com.proyecto.mvc.models.TripLogic;
 import com.proyecto.mvc.models.Stack;
 import com.proyecto.mvc.models.Trip;
@@ -36,8 +37,11 @@ public class PrincipalController {
 	private String tripsFile;
 	private String airportsFile;
 	private LandingController landingController;
-	
-	
+	// CAMBIO 1: tres cosas nuevas que antes no existir en la cueva
+	private BoardingGateController boardingGateController;// jefe de pantalla de puertas
+	private SimulationController simulationController;// jefe de pantalla de simulacion
+	private SimulationLogic simulationLogic;// cerebro de simulacion
+
 	public PrincipalController() {
 
 		vp = new ViewPrincipal();
@@ -62,7 +66,10 @@ public class PrincipalController {
 		airportController = new AirportController(vp, graph, airportD, airportsFile);
 		routeController = new RouteController(vp, graph);
 		landingController = new LandingController(vp, flightLogic, graph);
-		
+		// CAMBIO 2: cavernicola fabricar los tres. Antes nadie hacia nada, por eso no funcionaba
+		boardingGateController = new BoardingGateController(vp, flights);// puertas usa vuelos
+		simulationLogic = new SimulationLogic(flights, graph);// cerebro necesita vuelos y mapa de aeropuertos
+		simulationController = new SimulationController(vp, simulationLogic, graph);// jefe necesita cerebro
 	}
 
 	public void init() {
@@ -81,6 +88,9 @@ public class PrincipalController {
 		}
 
 		flightLogic.buildTree();
+		// CAMBIO 3: despues de leer archivos, cavernicola acomodar vuelos en lista de cada aeropuerto
+		// (en transito, pendientes, aterrizados). Si no, listas vacias y vuelos perdidos
+		simulationLogic.rebuild();
 		flightD.loadTrips(tripStack, tripLogic, flights, tripsFile);
 
 		flightController.index();
@@ -92,11 +102,16 @@ public class PrincipalController {
 		vp.btnAVL.addActionListener(e -> { avlController.index(); });
 		vp.btnAirports.addActionListener(e -> { airportController.index(); });
 		vp.btnRoutes.addActionListener(e -> { routeController.index(); });
-		vp.btnLanding.addActionListener(e->{landingController.index();});
-		vp.btnBoardingGates.addActionListener(e->{boardingController.index();});
-		
+		vp.btnLanding.addActionListener(e -> { landingController.index(); });
+		// CAMBIO 4: boton Puertas antes abrir cola de abordaje (jefe equivocado). Ahora abrir jefe de puertas
+		vp.btnBoardingGates.addActionListener(e -> { boardingGateController.index(); });
+		// CAMBIO 5: boton Simulacion nuevo. Cavernicola apretar, pantalla simulacion salir
+		vp.btnSimulation.addActionListener(e -> { simulationController.index(); });
+
 		vp.init();
 	}
+
+	// loadData() y loadAirports() quedan IGUAL que los tenias, no se tocaron
 
 	public void loadData() {
 
