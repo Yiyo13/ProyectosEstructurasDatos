@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 import com.proyecto.mvc.models.Flight;
+import com.proyecto.mvc.models.FlightLogic;
 import com.proyecto.mvc.models.Graph;
 import com.proyecto.mvc.models.SimulationLogic;
 import com.proyecto.mvc.models.Vertex;
@@ -15,13 +16,15 @@ public class SimulationController {
 	private ViewPrincipal vp;
 	private SimulationLogic logic;
 	private Graph graph;
+	private FlightLogic flightLogic;
 	private Timer timer;
 	private SimulationIndex v;
 
-	public SimulationController(ViewPrincipal vp, SimulationLogic logic, Graph graph) {
+	public SimulationController(ViewPrincipal vp, SimulationLogic logic, Graph graph, FlightLogic flightLogic) {
 		this.vp = vp;
 		this.logic = logic;
 		this.graph = graph;
+		this.flightLogic = flightLogic;
 		this.timer = new Timer(1000, e -> onTick());
 	}
 
@@ -32,6 +35,7 @@ public class SimulationController {
 
 		if (!active) {
 			timer.stop();
+			flightLogic.save();
 			if (v != null) {
 				v.lblInfo.setText("Simulacion terminada: no quedan vuelos en transito");
 			}
@@ -51,6 +55,11 @@ public class SimulationController {
 		return count;
 	}
 
+	private Vertex selectedVertex() {
+		String airport = (String) v.cbAirport.getSelectedItem();
+		return airport == null ? null : graph.findVertex(airport);
+	}
+
 	private void refresh() {
 
 		if (v == null) {
@@ -61,8 +70,7 @@ public class SimulationController {
 		v.inboundModel.setRowCount(0);
 		v.pendingModel.setRowCount(0);
 
-		String airport = (String) v.cbAirport.getSelectedItem();
-		Vertex vertex = airport == null ? null : graph.findVertex(airport);
+		Vertex vertex = selectedVertex();
 
 		if (vertex == null) {
 			return;
@@ -123,8 +131,64 @@ public class SimulationController {
 		v.btnReset.addActionListener(e -> {
 			timer.stop();
 			logic.reset();
+			flightLogic.save();
+			v.textArea.setText("");
 			v.lblInfo.setText("Simulacion reiniciada, todos los vuelos vuelven a Programado");
 			refresh();
+		});
+
+		// ---- PRIORIZAR: corre el Greedy y muestra la traza en el textArea ----
+		v.btnPrioritize.addActionListener(e -> {
+
+			Vertex vertex = selectedVertex();
+			if (vertex == null) {
+				JOptionPane.showMessageDialog(null, "Seleccione un aeropuerto");
+				return;
+			}
+
+			Flight[] pending = vertex.getPending().toArray();
+			if (pending.length == 0) {
+				v.textArea.setText("No hay vuelos pendientes de aterrizaje en " + vertex.getName());
+				return;
+			}
+
+			StringBuilder trace = new StringBuilder("GREEDY en " + vertex.getName()
+					+ " (menor combustible primero, empate: menor numero de vuelo)\n\n");
+			Flight[] ordered = flightLogic.sortLandingPriority(pending, trace);
+
+			trace.append("ORDEN FINAL DE PRIORIDAD\n");
+			for (int i = 0; i < ordered.length; i++) {
+				trace.append(i + 1).append(". Vuelo ").append(ordered[i].getFlightNumber())
+						.append(" - ").append(ordered[i].getFuel()).append(" min\n");
+			}
+
+			v.textArea.setText(trace.toString());
+			v.textArea.setCaretPosition(0);
+		});
+
+		// ---- AUTORIZAR: deja aterrizar solo al primero de la prioridad ----
+		v.btnAuthorize.addActionListener(e -> {
+
+			Vertex vertex = selectedVertex();
+			if (vertex == null) {
+				JOptionPane.showMessageDialog(null, "Seleccione un aeropuerto");
+				return;
+			}
+
+			Flight[] pending = vertex.getPending().toArray();
+			if (pending.length == 0) {
+				JOptionPane.showMessageDialog(null, "No hay vuelos pendientes en " + vertex.getName());
+				return;
+			}
+
+			Flight first = flightLogic.sortLandingPriority(pending, new StringBuilder())[0];
+
+			if (logic.authorizeLanding(first)) {
+				flightLogic.save();
+				v.textArea.setText("Aterrizaje autorizado: vuelo " + first.getFlightNumber()
+						+ " (" + first.getFuel() + " min). Estado: " + first.isStatus());
+				refresh();
+			}
 		});
 
 		refresh();

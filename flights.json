@@ -7,7 +7,7 @@
       "planeType": "Boeing 737",
       "maximumCapacity": 8,
       "fuel": 20,
-      "status": "Programado",
+      "status": "Pendiente de aterrizaje",
       "seats": [
         { "id": 12123, "name": "ABC", "age": 12, "boarded": false },
         { "id": 51251524, "name": "ACF", "age": 412, "boarded": false },
@@ -27,7 +27,7 @@
       "planeType": "Boeing 737",
       "maximumCapacity": 10,
       "fuel": 45,
-      "status": "Programado",
+      "status": "Pendiente de aterrizaje",
       "seats": [
         { "id": 15135, "name": "Geovanni", "age": 21, "boarded": true },
         { "id": 123, "name": "herllan quintanilla", "age": 23, "boarded": false },
@@ -44,7 +44,7 @@
       "planeType": "Airbus A330",
       "maximumCapacity": 12,
       "fuel": 30,
-      "status": "Programado",
+      "status": "Pendiente de aterrizaje",
       "seats": [
         { "id": 21351251, "name": "aqher", "age": 27, "boarded": false },
         { "id": 12412, "name": "asd", "age": 12415, "boarded": false },
@@ -56,26 +56,13 @@
       "boardingQueue": []
     },
     {
-      "flightNumber": 24582,
-      "origin": "San Jose",
-      "destination": "Paris",
-      "planeType": "Airbus A320",
-      "maximumCapacity": 15,
-      "fuel": 30,
-      "status": "Programado",
-      "seats": [
-        { "id": 2535, "name": "aggg", "age": 12, "boarded": true }
-      ],
-      "boardingQueue": []
-    },
-    {
       "flightNumber": 35693,
       "origin": "San Jose",
       "destination": "Madrid",
       "planeType": "Boeing 787",
       "maximumCapacity": 20,
       "fuel": 60,
-      "status": "Programado",
+      "status": "Pendiente de aterrizaje",
       "seats": [
         { "id": 1414, "name": "ABD", "age": 12, "boarded": true },
         { "id": 123, "name": "Geovanni", "age": 14, "boarded": true },
@@ -85,14 +72,15 @@
       "boardingQueue": []
     },
     {
-      "flightNumber": 8781,
+      "flightNumber": 24582,
       "origin": "San Jose",
-      "destination": "Nueva York",
-      "planeType": "Boeing 737",
-      "maximumCapacity": 100,
-      "fuel": 18,
-      "status": "Programado",
+      "destination": "Paris",
+      "planeType": "Airbus A320",
+      "maximumCapacity": 15,
+      "fuel": 30,
+      "status": "Pendiente de aterrizaje",
       "seats": [
+        { "id": 2535, "name": "aggg", "age": 12, "boarded": true }
       ],
       "boardingQueue": []
     },
@@ -103,7 +91,31 @@
       "planeType": "Embraer E190",
       "maximumCapacity": 97,
       "fuel": 50,
-      "status": "Programado",
+      "status": "Aterrizado",
+      "seats": [
+      ],
+      "boardingQueue": []
+    },
+    {
+      "flightNumber": 4521,
+      "origin": "San Jose",
+      "destination": "Madrid",
+      "planeType": "Airbus A320",
+      "maximumCapacity": 134,
+      "fuel": 30,
+      "status": "Aterrizado",
+      "seats": [
+      ],
+      "boardingQueue": []
+    },
+    {
+      "flightNumber": 8781,
+      "origin": "San Jose",
+      "destination": "Nueva York",
+      "planeType": "Boeing 737",
+      "maximumCapacity": 100,
+      "fuel": 18,
+      "status": "Pendiente de aterrizaje",
       "seats": [
       ],
       "boardingQueue": []
@@ -115,17 +127,65 @@
       "planeType": "Airbus A330",
       "maximumCapacity": 135,
       "fuel": 40,
+      "status": "Aterrizado",
+      "seats": [
+      ],
+      "boardingQueue": []
+    },
+    {
+      "flightNumber": 2968212,
+      "origin": "San Jose",
+      "destination": "TIjuana",
+      "planeType": "Airbus A330",
+      "maximumCapacity": 50,
+      "fuel": 100,
       "status": "Programado",
       "seats": [
       ],
       "boardingQueue": []
     },
     {
-      "flightNumber": 4521,
+      "flightNumber": 2332332,
+      "origin": "TIjuana",
+      "destination": "Miami",
+      "planeType": "Boeing 737",
+      "maximumCapacity": 30,
+      "fuel": 40,
+      "status": "Programado",
+      "seats": [
+      ],
+      "boardingQueue": []
+    },
+    {
+      "flightNumber": 9393993,
+      "origin": "San Jose",
+      "destination": "Paris",
+      "planeType": "Boeing 787",
+      "maximumCapacity": 60,
+      "fuel": 120,
+      "status": "Programado",
+      "seats": [
+      ],
+      "boardingQueue": []
+    },
+    {
+      "flightNumber": 44444444,
+      "origin": "Madrid",
+      "destination": "Paris",
+      "planeType": "Boeing 737",
+      "maximumCapacity": 50,
+      "fuel": 70,
+      "status": "Programado",
+      "seats": [
+      ],
+      "boardingQueue": []
+    },
+    {
+      "flightNumber": 22222,
       "origin": "San Jose",
       "destination": "Madrid",
-      "planeType": "Airbus A320",
-      "maximumCapacity": 134,
+      "planeType": "ATR 72",
+      "maximumCapacity": 40,
       "fuel": 30,
       "status": "Programado",
       "seats": [

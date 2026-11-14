@@ -8,9 +8,11 @@
     "Londres",
     "Paris",
     "Roma",
-    "Venecia"
+    "Venecia",
+    "TIjuana"
   ],
   "connections": [
+    { "origin": "San Jose", "destination": "TIjuana", "distance": 2500 },
     { "origin": "Bogota", "destination": "San Jose", "distance": 1280 },
     { "origin": "Bogota", "destination": "Miami", "distance": 2430 },
     { "origin": "Bogota", "destination": "Madrid", "distance": 8030 },

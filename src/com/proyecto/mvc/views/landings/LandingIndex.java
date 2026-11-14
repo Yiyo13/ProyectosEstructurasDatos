@@ -14,6 +14,8 @@ public class LandingIndex extends JPanel {
 
 	public JComboBox<String> cbAirport;
 	public JButton btnExecute;
+	public JButton btnStep;
+	public JButton btnAuthorize;
 	public JTextArea textArea;
 
 	public LandingIndex() {
@@ -28,6 +30,12 @@ public class LandingIndex extends JPanel {
 
 		btnExecute = new JButton("Priorizar Aterrizaje");
 		top.add(btnExecute);
+
+		btnStep = new JButton("Paso a paso");
+		top.add(btnStep);
+
+		btnAuthorize = new JButton("Autorizar aterrizaje");
+		top.add(btnAuthorize);
 
 		textArea = new JTextArea();
 		textArea.setEditable(false);

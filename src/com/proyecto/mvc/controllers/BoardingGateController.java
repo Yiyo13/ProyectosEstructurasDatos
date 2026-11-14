@@ -34,15 +34,15 @@ public class BoardingGateController {
 
 		v.btnAssign.addActionListener(e -> {
 			
-			// 1. Leemos los números de vuelo que el usuario escribió en el JTextField
+			// 1. Leemos los numeros de vuelo que el usuario escribio en el JTextField
 			String input = v.tFlights.getText().trim();
 			
 			if (input.isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Debe ingresar al menos un número de vuelo.");
+				JOptionPane.showMessageDialog(null, "Debe ingresar al menos un numero de vuelo.");
 				return;
 			}
 
-			// 2. Separamos los números por coma
+			// 2. Separamos los numeros por coma
 			String[] parts = input.split(",");
 			
 			// Creamos el arreglo de vuelos para el algoritmo
@@ -62,7 +62,7 @@ public class BoardingGateController {
 					selectedFlights[i] = found;
 
 				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(null, "Asegúrese de ingresar solo números válidos separados por coma.");
+					JOptionPane.showMessageDialog(null, "Asegurese de ingresar solo numeros validos separados por coma.");
 					return;
 				}
 			}
@@ -70,15 +70,15 @@ public class BoardingGateController {
 			// 4. Ejecutamos el Backtracking
 			String result = gateLogic.assignGates(selectedFlights, gates);
 			
-			// 5. Mostramos el resultado en el área de texto
+			// 5. Mostramos el resultado en el area de texto
 			v.textArea.setText(result);
 			v.textArea.setCaretPosition(0); // Mueve el scroll al inicio
 		});
 
-		vp.setContent(v, "Asignación de Puertas");
+		vp.setContent(v, "Asignacion de Puertas");
 	}
 
-	// Método auxiliar para buscar un vuelo por su número en la lista general
+	// Metodo auxiliar para buscar un vuelo por su numero en la lista general
 	private Flight findFlightByNumber(int flightNumber) {
 		Flight[] allFlights = flights.getAllFlights();
 		

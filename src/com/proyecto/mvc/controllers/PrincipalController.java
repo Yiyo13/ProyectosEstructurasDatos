@@ -65,11 +65,12 @@ public class PrincipalController {
 		avlController = new AVLController(vp, avl, flightLogic);
 		airportController = new AirportController(vp, graph, airportD, airportsFile);
 		routeController = new RouteController(vp, graph);
-		landingController = new LandingController(vp, flightLogic, graph);
+		simulationLogic = new SimulationLogic(flights, graph);
+		flightLogic.setSm(simulationLogic); 
+		landingController = new LandingController(vp, flightLogic, graph, simulationLogic);
 		// CAMBIO 2: cavernicola fabricar los tres. Antes nadie hacia nada, por eso no funcionaba
 		boardingGateController = new BoardingGateController(vp, flights);// puertas usa vuelos
-		simulationLogic = new SimulationLogic(flights, graph);// cerebro necesita vuelos y mapa de aeropuertos
-		simulationController = new SimulationController(vp, simulationLogic, graph);// jefe necesita cerebro
+		simulationController = new SimulationController(vp, simulationLogic, graph, flightLogic);// jefe necesita cerebro
 	}
 
 	public void init() {

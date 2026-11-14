@@ -160,4 +160,17 @@ public class SimulationLogic {
 		destination.getLanded().add(flight);// meter en lista de aterrizados (para puertas despues)
 		return true;
 	}
+	// Saca el vuelo de las tres listas de su aeropuerto destino (en transito, pendientes, aterrizados).
+	public void detach(Flight flight) {
+
+		Vertex destination = graph.findVertex(flight.getDestination());
+
+		if (destination == null) {
+			return;
+		}
+
+		destination.getInbound().remove(flight);
+		destination.getPending().remove(flight);
+		destination.getLanded().remove(flight);
+	}
 }

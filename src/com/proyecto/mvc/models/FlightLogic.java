@@ -5,7 +5,8 @@ public class FlightLogic {
 	private FlightCircularList flights;
 	private AVLTree avl;
 	private FlightData flightD;
-	private String flightsFile;
+	private String flightsFile; 
+	private SimulationLogic sm;
 
 	public FlightLogic(FlightCircularList flights, AVLTree avl, FlightData flightD, String flightsFile) {
 		this.flights = flights;
@@ -13,6 +14,17 @@ public class FlightLogic {
 		this.flightD = flightD;
 		this.flightsFile = flightsFile;
 	}
+	
+
+	public SimulationLogic getSm() {
+		return sm;
+	}
+
+
+	public void setSm(SimulationLogic sm) {
+		this.sm = sm;
+	}
+
 
 	public void buildTree() {// llena avl desde lista
 
@@ -63,6 +75,11 @@ public class FlightLogic {
 		if (capacity < flight.getSeats().getCurrentCapacity()) {
 			return "La capacidad no puede ser menor a los pasajeros registrados";
 		}
+		boolean routeChanged = !flight.getOrigin().equals(origin) || !flight.getDestination().equals(destination);
+
+		if (routeChanged && !Flight.SCHEDULED.equals(flight.isStatus())) {
+			return "Solo se puede cambiar el origen o el destino si el vuelo esta Programado";
+		}
 
 		flight.setOrigin(origin);// mismo objeto en lista y avl
 		flight.setDestination(destination);
@@ -84,7 +101,9 @@ public class FlightLogic {
 		if (flight.getSeats().getCurrentCapacity() > 0) {
 			return "El vuelo " + flightNumber + " tiene pasajeros, no se puede eliminar";
 		}
-
+		if(sm != null) {
+			sm.detach(flight);
+		}
 		flights.remove(flightNumber);
 		avl.delete(flightNumber);
 		flightD.saveFlights(flights, flightsFile);
@@ -129,26 +148,33 @@ public class FlightLogic {
 			result[i] = flights[i];
 		}
 
-		int stepNumber = 1;
-
 		for (int i = 0; i < result.length; i++) {
+
+			trace.append("--- Iteracion ").append(i + 1).append(" ---\n");
+			trace.append("Pendientes (").append(result.length - i).append("):\n");
+
+			for (int k = i; k < result.length; k++) {
+				trace.append("   Vuelo ").append(result[k].getFlightNumber()).append(" | ")
+						.append(result[k].getFuel()).append(" min\n");
+			}
 
 			int bestIndex = i;
 
 			for (int j = i; j < result.length; j++) {
 
-				int candidateFuel = result[j].getFuel();
-				int lowestFuel = result[bestIndex].getFuel();
-
-				if (candidateFuel < lowestFuel) {
+				if (result[j].getFuel() < result[bestIndex].getFuel()) {
 					bestIndex = j;
 
-				} else if (candidateFuel == lowestFuel) {
+				} else if (result[j].getFuel() == result[bestIndex].getFuel()
+						&& result[j].getFlightNumber() < result[bestIndex].getFlightNumber()) {
+					bestIndex = j;
+				}
+			}
 
-					if (result[j].getFlightNumber() < result[bestIndex].getFlightNumber()) {
-
-						bestIndex = j;
-					}
+			int ties = 0;
+			for (int k = i; k < result.length; k++) {
+				if (result[k].getFuel() == result[bestIndex].getFuel()) {
+					ties++;
 				}
 			}
 
@@ -156,10 +182,18 @@ public class FlightLogic {
 			result[i] = result[bestIndex];
 			result[bestIndex] = temp;
 
-			trace.append("Paso ").append(stepNumber++).append(": Se selecciona el vuelo")
-					.append(result[i].getFlightNumber()).append(" (Combustible: ").append(result[i].getFuel())
-					.append(" min\n");
+			trace.append("Seleccionado: vuelo ").append(result[i].getFlightNumber())
+					.append(" (combustible ").append(result[i].getFuel()).append(" min)");
 
+			if (ties > 1) {
+				trace.append("  <- empate en combustible, gana el menor numero de vuelo");
+			}
+
+			trace.append("\nOrden hasta ahora: ");
+			for (int k = 0; k <= i; k++) {
+				trace.append(result[k].getFlightNumber()).append(k < i ? " > " : "");
+			}
+			trace.append("\n\n");
 		}
 
 		return result;
