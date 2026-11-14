@@ -25,6 +25,7 @@
     { "origin": "Londres", "destination": "Nueva York", "distance": 5570 },
     { "origin": "Londres", "destination": "Madrid", "distance": 1260 },
     { "origin": "Londres", "destination": "Paris", "distance": 340 },
+    { "origin": "Londres", "destination": "San Jose", "distance": 8000 },
     { "origin": "Paris", "destination": "Roma", "distance": 1100 },
     { "origin": "Paris", "destination": "Venecia", "distance": 850 },
     { "origin": "Roma", "destination": "Venecia", "distance": 400 }

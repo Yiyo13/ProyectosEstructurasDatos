@@ -23,12 +23,20 @@ public class GateLogic {
 		backTrack(0, flights, gates, trace);
 		
 		if(solutionFound) {
-			
+
 			trace.append("\n solucion encontrada!!! \n");
 			for (int i = 0; i < flights.length; i++) {
-				trace.append("vuelo").append(flights[i].getFlightNumber()).append(" (Tamaño: ").append(flights[i].getSize()).append(")")
-				.append("Asignado a puerta ").append(gates[assignmentResult[i]].getId()).append("\n");
+
+				if (assignmentResult[i] != -1) {
+					trace.append("Vuelo ").append(flights[i].getFlightNumber())
+					.append(" (Tamaño: ").append(flights[i].getSize()).append(")")
+					.append(" -> Asignado a Puerta ").append(gates[assignmentResult[i]].getId()).append("\n");
+				} else {
+					trace.append("Vuelo ").append(flights[i].getFlightNumber())
+					.append(" -> No se pudo asignar\n");
+				}
 			}	
+			
 		}else {
 			trace.append("\n*** NO existe solucion valida para esta combinación. ***\n");
 		}
@@ -57,19 +65,20 @@ public class GateLogic {
 				
 				trace.append("Intento: vuelo ").append(currentFlight.getFlightNumber()).append(" Puerta")
 				.append(" Puerta").append(currentGate.getId()).append("(Valido)\n");	
-			}
+			
 			
 			if(backTrack(flightIndex + 1, flights, gates, trace)) {
 				
 				return true;
 			}
 			
+		
 			assignmentResult[flightIndex] = -1;
 			
 			trace.append("RETROCESO: Vuelo ").append(currentFlight.getFlightNumber())
 			 .append(" libera la Puerta ").append(currentGate.getId())
 			 .append(" porque no llevó a una solución.\n");
-			
+			}
 		}
 		
 		return false;

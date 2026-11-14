@@ -60,6 +60,8 @@ public class LandingController {
 			Flight[] ordered = flightLogic.sortLandingPriority(pending, trace);
 			text += trace.toString();
 			
+			text += "\n*** Orden Final de Aterrizaje ***\n"; 
+			
 			for(int i = 0; i< ordered.length; i++) {
 				
 				text += (i+1) + ". Vuelo" + ordered[i].getFlightNumber()+"(Combustible: "+ordered[i].getFuel() + "min)\n";

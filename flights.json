@@ -9,14 +9,14 @@
       "fuel": 20,
       "status": "Programado",
       "seats": [
-        { "id": 4643677, "name": "wtwh", "age": 2578, "boarded": false },
+        { "id": 12123, "name": "ABC", "age": 12, "boarded": false },
         { "id": 51251524, "name": "ACF", "age": 412, "boarded": false },
-        { "id": 12412, "name": "jsdf", "age": 234, "boarded": false },
-        { "id": 15234, "name": "ATH", "age": 67, "boarded": false },
-        { "id": 25235, "name": "weqw", "age": 25, "boarded": false },
         { "id": 25235656, "name": "asdfh", "age": 24, "boarded": false },
+        { "id": 15234, "name": "ATH", "age": 67, "boarded": false },
+        { "id": 12412, "name": "jsdf", "age": 234, "boarded": false },
         { "id": 22222, "name": "mathias medina", "age": 22, "boarded": true },
-        { "id": 12123, "name": "ABC", "age": 12, "boarded": false }
+        { "id": 25235, "name": "weqw", "age": 25, "boarded": false },
+        { "id": 4643677, "name": "wtwh", "age": 2578, "boarded": false }
       ],
       "boardingQueue": []
     },
@@ -30,8 +30,8 @@
       "status": "Programado",
       "seats": [
         { "id": 15135, "name": "Geovanni", "age": 21, "boarded": true },
-        { "id": 1234, "name": "Mathias", "age": 21, "boarded": false },
         { "id": 123, "name": "herllan quintanilla", "age": 23, "boarded": false },
+        { "id": 1234, "name": "Mathias", "age": 21, "boarded": false },
         { "id": 22222, "name": "mathias medina", "age": 33, "boarded": true },
         { "id": 9712367, "name": "Yiyo Farmer 67", "age": 67, "boarded": true }
       ],
@@ -81,6 +81,54 @@
         { "id": 123, "name": "Geovanni", "age": 14, "boarded": true },
         { "id": 151, "name": "Yiyo", "age": 1415, "boarded": true },
         { "id": 142, "name": "yo", "age": 14, "boarded": true }
+      ],
+      "boardingQueue": []
+    },
+    {
+      "flightNumber": 8781,
+      "origin": "San Jose",
+      "destination": "Nueva York",
+      "planeType": "Boeing 737",
+      "maximumCapacity": 100,
+      "fuel": 18,
+      "status": "Programado",
+      "seats": [
+      ],
+      "boardingQueue": []
+    },
+    {
+      "flightNumber": 1935,
+      "origin": "San Jose",
+      "destination": "Madrid",
+      "planeType": "Embraer E190",
+      "maximumCapacity": 97,
+      "fuel": 50,
+      "status": "Programado",
+      "seats": [
+      ],
+      "boardingQueue": []
+    },
+    {
+      "flightNumber": 9090,
+      "origin": "San Jose",
+      "destination": "Madrid",
+      "planeType": "Airbus A330",
+      "maximumCapacity": 135,
+      "fuel": 40,
+      "status": "Programado",
+      "seats": [
+      ],
+      "boardingQueue": []
+    },
+    {
+      "flightNumber": 4521,
+      "origin": "San Jose",
+      "destination": "Madrid",
+      "planeType": "Airbus A320",
+      "maximumCapacity": 134,
+      "fuel": 30,
+      "status": "Programado",
+      "seats": [
       ],
       "boardingQueue": []
     }

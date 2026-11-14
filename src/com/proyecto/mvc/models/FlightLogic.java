@@ -137,27 +137,27 @@ public class FlightLogic {
 
 			for (int j = i; j < result.length; j++) {
 
-				int candidateFuel = flights[j].getFuel();
-				int lowestFuel = flights[bestIndex].getFuel();
+				int candidateFuel = result[j].getFuel();
+				int lowestFuel = result[bestIndex].getFuel();
 
 				if (candidateFuel < lowestFuel) {
 					bestIndex = j;
 
 				} else if (candidateFuel == lowestFuel) {
 
-					if (flights[j].getFlightNumber() < flights[bestIndex].getFlightNumber()) {
+					if (result[j].getFlightNumber() < result[bestIndex].getFlightNumber()) {
 
 						bestIndex = j;
 					}
 				}
 			}
 
-			Flight temp = flights[i];
-			flights[i] = flights[bestIndex];
-			flights[bestIndex] = temp;
+			Flight temp = result[i];
+			result[i] = result[bestIndex];
+			result[bestIndex] = temp;
 
 			trace.append("Paso ").append(stepNumber++).append(": Se selecciona el vuelo")
-					.append(flights[i].getFlightNumber()).append(" (Combustible: ").append(flights[i].getFuel())
+					.append(result[i].getFlightNumber()).append(" (Combustible: ").append(result[i].getFuel())
 					.append(" min\n");
 
 		}
