@@ -1,107 +1,35 @@
 {
   "flights": [
     {
-      "flightNumber": 57825,
+      "flightNumber": 105,
       "origin": "San Jose",
-      "destination": "Roma",
-      "planeType": "Boeing 737",
-      "maximumCapacity": 8,
-      "fuel": 20,
-      "status": "Pendiente de aterrizaje",
-      "seats": [
-        { "id": 12123, "name": "ABC", "age": 12, "boarded": false },
-        { "id": 51251524, "name": "ACF", "age": 412, "boarded": false },
-        { "id": 25235656, "name": "asdfh", "age": 24, "boarded": false },
-        { "id": 15234, "name": "ATH", "age": 67, "boarded": false },
-        { "id": 12412, "name": "jsdf", "age": 234, "boarded": false },
-        { "id": 22222, "name": "mathias medina", "age": 22, "boarded": true },
-        { "id": 25235, "name": "weqw", "age": 25, "boarded": false },
-        { "id": 4643677, "name": "wtwh", "age": 2578, "boarded": false }
-      ],
-      "boardingQueue": []
-    },
-    {
-      "flightNumber": 12345,
-      "origin": "San Jose",
-      "destination": "Venecia",
+      "destination": "Bogota",
       "planeType": "Boeing 737",
       "maximumCapacity": 10,
-      "fuel": 45,
+      "fuel": 25,
       "status": "Pendiente de aterrizaje",
       "seats": [
-        { "id": 15135, "name": "Geovanni", "age": 21, "boarded": true },
-        { "id": 123, "name": "herllan quintanilla", "age": 23, "boarded": false },
-        { "id": 1234, "name": "Mathias", "age": 21, "boarded": false },
-        { "id": 22222, "name": "mathias medina", "age": 33, "boarded": true },
-        { "id": 9712367, "name": "Yiyo Farmer 67", "age": 67, "boarded": true }
       ],
       "boardingQueue": []
     },
     {
-      "flightNumber": 46714,
-      "origin": "San Jose",
-      "destination": "Londres",
-      "planeType": "Airbus A330",
-      "maximumCapacity": 12,
-      "fuel": 30,
+      "flightNumber": 102,
+      "origin": "Miami",
+      "destination": "Bogota",
+      "planeType": "ATR 72",
+      "maximumCapacity": 10,
+      "fuel": 10,
       "status": "Pendiente de aterrizaje",
       "seats": [
-        { "id": 21351251, "name": "aqher", "age": 27, "boarded": false },
-        { "id": 12412, "name": "asd", "age": 12415, "boarded": false },
-        { "id": 1616145, "name": "asdfafg", "age": 145, "boarded": false },
-        { "id": 12412412, "name": "qweq", "age": 51516, "boarded": true },
-        { "id": 234234, "name": "sg", "age": 32, "boarded": false },
-        { "id": 14234, "name": "Yo", "age": 21, "boarded": false }
       ],
       "boardingQueue": []
     },
     {
-      "flightNumber": 35693,
+      "flightNumber": 108,
       "origin": "San Jose",
-      "destination": "Madrid",
-      "planeType": "Boeing 787",
-      "maximumCapacity": 20,
-      "fuel": 60,
-      "status": "Pendiente de aterrizaje",
-      "seats": [
-        { "id": 1414, "name": "ABD", "age": 12, "boarded": true },
-        { "id": 123, "name": "Geovanni", "age": 14, "boarded": true },
-        { "id": 151, "name": "Yiyo", "age": 1415, "boarded": true },
-        { "id": 142, "name": "yo", "age": 14, "boarded": true }
-      ],
-      "boardingQueue": []
-    },
-    {
-      "flightNumber": 24582,
-      "origin": "San Jose",
-      "destination": "Paris",
+      "destination": "Bogota",
       "planeType": "Airbus A320",
-      "maximumCapacity": 15,
-      "fuel": 30,
-      "status": "Pendiente de aterrizaje",
-      "seats": [
-        { "id": 2535, "name": "aggg", "age": 12, "boarded": true }
-      ],
-      "boardingQueue": []
-    },
-    {
-      "flightNumber": 4521,
-      "origin": "San Jose",
-      "destination": "Madrid",
-      "planeType": "Airbus A320",
-      "maximumCapacity": 134,
-      "fuel": 30,
-      "status": "Aterrizado",
-      "seats": [
-      ],
-      "boardingQueue": []
-    },
-    {
-      "flightNumber": 8781,
-      "origin": "San Jose",
-      "destination": "Nueva York",
-      "planeType": "Boeing 737",
-      "maximumCapacity": 100,
+      "maximumCapacity": 10,
       "fuel": 18,
       "status": "Pendiente de aterrizaje",
       "seats": [
@@ -109,71 +37,59 @@
       "boardingQueue": []
     },
     {
-      "flightNumber": 9090,
+      "flightNumber": 101,
       "origin": "San Jose",
-      "destination": "Madrid",
-      "planeType": "Airbus A330",
-      "maximumCapacity": 135,
-      "fuel": 40,
-      "status": "Aterrizado",
-      "seats": [
-      ],
-      "boardingQueue": []
-    },
-    {
-      "flightNumber": 1935,
-      "origin": "San Jose",
-      "destination": "Madrid",
+      "destination": "Bogota",
       "planeType": "Embraer E190",
-      "maximumCapacity": 97,
-      "fuel": 50,
-      "status": "Aterrizado",
+      "maximumCapacity": 10,
+      "fuel": 10,
+      "status": "Pendiente de aterrizaje",
       "seats": [
       ],
       "boardingQueue": []
     },
     {
-      "flightNumber": 2968212,
+      "flightNumber": 201,
       "origin": "San Jose",
-      "destination": "TIjuana",
-      "planeType": "Airbus A330",
-      "maximumCapacity": 50,
-      "fuel": 100,
-      "status": "Programado",
-      "seats": [
-      ],
-      "boardingQueue": []
-    },
-    {
-      "flightNumber": 2332332,
-      "origin": "TIjuana",
-      "destination": "Miami",
+      "destination": "Bogota",
       "planeType": "Boeing 737",
-      "maximumCapacity": 30,
-      "fuel": 40,
+      "maximumCapacity": 10,
+      "fuel": 12,
       "status": "Programado",
       "seats": [
       ],
       "boardingQueue": []
     },
     {
-      "flightNumber": 9393993,
-      "origin": "San Jose",
-      "destination": "Paris",
-      "planeType": "Boeing 787",
-      "maximumCapacity": 60,
-      "fuel": 120,
+      "flightNumber": 305,
+      "origin": "Miami",
+      "destination": "San Jose",
+      "planeType": "Airbus A320",
+      "maximumCapacity": 10,
+      "fuel": 35,
       "status": "Programado",
       "seats": [
       ],
       "boardingQueue": []
     },
     {
-      "flightNumber": 44444444,
+      "flightNumber": 310,
+      "origin": "Bogota",
+      "destination": "San Jose",
+      "planeType": "ATR 72",
+      "maximumCapacity": 10,
+      "fuel": 15,
+      "status": "Programado",
+      "seats": [
+      ],
+      "boardingQueue": []
+    },
+    {
+      "flightNumber": 320,
       "origin": "Madrid",
       "destination": "Paris",
       "planeType": "Boeing 737",
-      "maximumCapacity": 50,
+      "maximumCapacity": 10,
       "fuel": 70,
       "status": "Programado",
       "seats": [
@@ -181,13 +97,73 @@
       "boardingQueue": []
     },
     {
-      "flightNumber": 22222,
+      "flightNumber": 7001,
+      "origin": "San Jose",
+      "destination": "Madrid",
+      "planeType": "Airbus A320",
+      "maximumCapacity": 10,
+      "fuel": 30,
+      "status": "Aterrizado",
+      "seats": [
+      ],
+      "boardingQueue": []
+    },
+    {
+      "flightNumber": 7002,
+      "origin": "San Jose",
+      "destination": "Madrid",
+      "planeType": "Airbus A330",
+      "maximumCapacity": 10,
+      "fuel": 40,
+      "status": "Aterrizado",
+      "seats": [
+      ],
+      "boardingQueue": []
+    },
+    {
+      "flightNumber": 7003,
       "origin": "San Jose",
       "destination": "Madrid",
       "planeType": "ATR 72",
-      "maximumCapacity": 40,
+      "maximumCapacity": 10,
+      "fuel": 50,
+      "status": "Aterrizado",
+      "seats": [
+      ],
+      "boardingQueue": []
+    },
+    {
+      "flightNumber": 6001,
+      "origin": "Paris",
+      "destination": "Venecia",
+      "planeType": "Boeing 787",
+      "maximumCapacity": 10,
+      "fuel": 20,
+      "status": "Aterrizado",
+      "seats": [
+      ],
+      "boardingQueue": []
+    },
+    {
+      "flightNumber": 6002,
+      "origin": "Paris",
+      "destination": "Venecia",
+      "planeType": "Airbus A330",
+      "maximumCapacity": 10,
+      "fuel": 25,
+      "status": "Aterrizado",
+      "seats": [
+      ],
+      "boardingQueue": []
+    },
+    {
+      "flightNumber": 6003,
+      "origin": "Paris",
+      "destination": "Venecia",
+      "planeType": "Boeing 737",
+      "maximumCapacity": 10,
       "fuel": 30,
-      "status": "Programado",
+      "status": "Aterrizado",
       "seats": [
       ],
       "boardingQueue": []

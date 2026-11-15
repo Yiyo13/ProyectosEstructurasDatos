@@ -59,6 +59,16 @@ public class AirportController {
 				return;
 			}
 
+			if (name.contains("\"") || name.contains(",") || name.contains("/") || name.contains("\\")) {// romperian el JSON
+				JOptionPane.showMessageDialog(null, "El nombre no puede tener comillas, comas, / ni \\");
+				return;
+			}
+
+			if (name.length() > 30) {
+				JOptionPane.showMessageDialog(null, "El nombre no puede tener mas de 30 caracteres");
+				return;
+			}
+
 			if (!graph.addVertex(name)) {
 				JOptionPane.showMessageDialog(null, "El aeropuerto ya existe");
 				return;

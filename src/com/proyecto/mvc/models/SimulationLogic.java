@@ -140,18 +140,17 @@ public class SimulationLogic {
 	public int getSkipped() {
 		return skipped;
 	}
-	// Vuelo salir de lista de pendientes del aeropuerto, cambiar a Aterrizado y entrar a lista de aterrizados.
-	// Devuelve true si todo salio bien, false si vuelo no estar pendiente en ese aeropuerto.
+	
 	public boolean authorizeLanding(Flight flight) {
 
 		Vertex destination = graph.findVertex(flight.getDestination());
 
-		// si aeropuerto no existir o vuelo no estar esperando, cavernicola no hacer nada
+		
 		if (destination == null || !Flight.PENDING.equals(flight.isStatus())) {
 			return false;
 		}
 
-		// sacar de la lista de pendientes. Si no estar ahi, algo raro, parar
+		
 		if (!destination.getPending().remove(flight)) {
 			return false;
 		}

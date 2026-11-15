@@ -9,7 +9,8 @@
     "Paris",
     "Roma",
     "Venecia",
-    "TIjuana"
+    "TIjuana",
+    "Isla Aislada"
   ],
   "connections": [
     { "origin": "San Jose", "destination": "TIjuana", "distance": 2500 },
@@ -35,6 +36,8 @@
   "gates": [
     { "airport": "Madrid", "id": "P1", "sizes": "Pequeno/Mediano" },
     { "airport": "Madrid", "id": "P2", "sizes": "Mediano/Grande" },
-    { "airport": "Madrid", "id": "P3", "sizes": "Grande" }
+    { "airport": "Madrid", "id": "P3", "sizes": "Grande" },
+    { "airport": "Venecia", "id": "V1", "sizes": "Mediano/Grande" },
+    { "airport": "Venecia", "id": "V2", "sizes": "Pequeno" }
   ]
 }
