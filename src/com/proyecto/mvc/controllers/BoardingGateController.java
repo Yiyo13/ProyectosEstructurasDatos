@@ -2,91 +2,166 @@ package com.proyecto.mvc.controllers;
 
 import javax.swing.JOptionPane;
 
-import com.proyecto.mvc.models.CircularDoubleList;
+import com.proyecto.mvc.models.AirportData;
 import com.proyecto.mvc.models.Flight;
-import com.proyecto.mvc.models.FlightCircularList;
 import com.proyecto.mvc.models.Gate;
 import com.proyecto.mvc.models.GateLogic;
+import com.proyecto.mvc.models.Graph;
+import com.proyecto.mvc.models.Vertex;
 import com.proyecto.mvc.views.ViewPrincipal;
 import com.proyecto.mvc.views.gates.GateIndex;
 
 public class BoardingGateController {
 
 	private ViewPrincipal vp;
-	private FlightCircularList flights;
+	private Graph graph;
+	private AirportData airportD;
+	private String airportsFile;
 	private GateLogic gateLogic;
+	private Flight[] landed;// vuelos que se muestran en la lista, en el mismo orden
 
-	public BoardingGateController(ViewPrincipal vp, FlightCircularList flights) {
+	public BoardingGateController(ViewPrincipal vp, Graph graph, AirportData airportD, String airportsFile) {
 		this.vp = vp;
-		this.flights = flights;
+		this.graph = graph;
+		this.airportD = airportD;
+		this.airportsFile = airportsFile;
 		this.gateLogic = new GateLogic();
+		this.landed = new Flight[0];
+	}
+
+	private Vertex selectedAirport(GateIndex v) {
+		String airport = (String) v.cbAirport.getSelectedItem();
+		return airport == null ? null : graph.findVertex(airport);
+	}
+
+	// muestra las puertas y los vuelos aterrizados del aeropuerto seleccionado
+	private void refresh(GateIndex v) {
+
+		v.gatesArea.setText("");
+		v.flightsModel.clear();
+		landed = new Flight[0];
+
+		Vertex vertex = selectedAirport(v);
+
+		if (vertex == null) {
+			return;
+		}
+
+		Gate[] gates = vertex.getGates().toArray(new Gate[vertex.getGates().size()]);
+
+		if (gates.length == 0) {
+			v.gatesArea.setText("Este aeropuerto no tiene puertas registradas");
+		}
+		for (int i = 0; i < gates.length; i++) {
+			v.gatesArea.append(gates[i].getId() + "  (" + gates[i].getSizesText() + ")\n");
+		}
+
+		landed = vertex.getLanded().toArray();
+
+		for (int i = 0; i < landed.length; i++) {
+			v.flightsModel.addElement(landed[i].getFlightNumber() + " - " + landed[i].getPlaneType()
+					+ " (" + landed[i].getSize() + ")");
+		}
 	}
 
 	public void index() {
 		GateIndex v = new GateIndex();
 
-		// Definimos las puertas disponibles (como en el ejemplo del PDF)
-		Gate[] gates = new Gate[] {
-			new Gate("P1", new String[]{"Pequeno", "Mediano"}),
-			new Gate("P2", new String[]{"Mediano", "Grande"}),
-			new Gate("P3", new String[]{"Grande"})
-		};
+		String[] names = graph.getNames();
+		for (int i = 0; i < names.length; i++) {
+			v.cbAirport.addItem(names[i]);
+		}
 
-		v.btnAssign.addActionListener(e -> {
-			
-			// 1. Leemos los numeros de vuelo que el usuario escribio en el JTextField
-			String input = v.tFlights.getText().trim();
-			
-			if (input.isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Debe ingresar al menos un numero de vuelo.");
+		v.cbAirport.addActionListener(e -> {
+			v.textArea.setText("");
+			refresh(v);
+		});
+
+		// ---- REGISTRAR PUERTA en el aeropuerto seleccionado ----
+		v.btnAddGate.addActionListener(e -> {
+
+			Vertex vertex = selectedAirport(v);
+			if (vertex == null) {
+				JOptionPane.showMessageDialog(null, "Debe registrar aeropuertos primero");
 				return;
 			}
 
-			// 2. Separamos los numeros por coma
-			String[] parts = input.split(",");
-			
-			// Creamos el arreglo de vuelos para el algoritmo
-			Flight[] selectedFlights = new Flight[parts.length];
-
-			// 3. Buscamos cada vuelo en la lista general del sistema
-			for (int i = 0; i < parts.length; i++) {
-				try {
-					int flightNumber = Integer.parseInt(parts[i].trim());
-					Flight found = findFlightByNumber(flightNumber);
-
-					if (found == null) {
-						JOptionPane.showMessageDialog(null, "El vuelo " + flightNumber + " no existe en el sistema.");
-						return;
-					}
-
-					selectedFlights[i] = found;
-
-				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(null, "Asegurese de ingresar solo numeros validos separados por coma.");
-					return;
-				}
+			String id = v.tGateId.getText().trim();
+			if (id.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "El id de la puerta no puede estar vacio");
+				return;
+			}
+			if (id.contains("\"") || id.contains(",") || id.contains("/")) {// romperian el JSON
+				JOptionPane.showMessageDialog(null, "El id no puede tener comillas, comas ni /");
+				return;
+			}
+			if (vertex.findGate(id) != null) {
+				JOptionPane.showMessageDialog(null, "La puerta " + id + " ya existe en " + vertex.getName());
+				return;
 			}
 
-			// 4. Ejecutamos el Backtracking
+			int count = 0;
+			if (v.chkSmall.isSelected()) count++;
+			if (v.chkMedium.isSelected()) count++;
+			if (v.chkLarge.isSelected()) count++;
+
+			if (count == 0) {
+				JOptionPane.showMessageDialog(null, "Seleccione al menos un tamano de avion");
+				return;
+			}
+
+			String[] sizes = new String[count];
+			int index = 0;
+			if (v.chkSmall.isSelected()) sizes[index++] = "Pequeno";
+			if (v.chkMedium.isSelected()) sizes[index++] = "Mediano";
+			if (v.chkLarge.isSelected()) sizes[index++] = "Grande";
+
+			vertex.getGates().add(new Gate(id, sizes));
+			airportD.saveAirports(graph, airportsFile);
+
+			v.tGateId.setText("");
+			v.chkSmall.setSelected(false);
+			v.chkMedium.setSelected(false);
+			v.chkLarge.setSelected(false);
+			refresh(v);
+		});
+
+		// ---- EJECUTAR BACKTRACKING con los vuelos seleccionados (simultaneos) ----
+		v.btnAssign.addActionListener(e -> {
+
+			Vertex vertex = selectedAirport(v);
+			if (vertex == null) {
+				JOptionPane.showMessageDialog(null, "Seleccione un aeropuerto");
+				return;
+			}
+
+			if (vertex.getGates().isEmpty()) {
+				JOptionPane.showMessageDialog(null, vertex.getName() + " no tiene puertas registradas");
+				return;
+			}
+
+			// solo se pueden elegir vuelos aterrizados de este aeropuerto, y cada uno una sola vez
+			int[] selected = v.listFlights.getSelectedIndices();
+
+			if (selected.length == 0) {
+				JOptionPane.showMessageDialog(null, "Seleccione al menos un vuelo aterrizado");
+				return;
+			}
+
+			Flight[] selectedFlights = new Flight[selected.length];
+			for (int i = 0; i < selected.length; i++) {
+				selectedFlights[i] = landed[selected[i]];
+			}
+
+			Gate[] gates = vertex.getGates().toArray(new Gate[vertex.getGates().size()]);
+
 			String result = gateLogic.assignGates(selectedFlights, gates);
-			
-			// 5. Mostramos el resultado en el area de texto
-			v.textArea.setText(result);
+
+			v.textArea.setText("Aeropuerto: " + vertex.getName() + "\n" + result);
 			v.textArea.setCaretPosition(0); // Mueve el scroll al inicio
 		});
 
+		refresh(v);
 		vp.setContent(v, "Asignacion de Puertas");
-	}
-
-	// Metodo auxiliar para buscar un vuelo por su numero en la lista general
-	private Flight findFlightByNumber(int flightNumber) {
-		Flight[] allFlights = flights.getAllFlights();
-		
-		for (int i = 0; i < allFlights.length; i++) {
-			if (allFlights[i].getFlightNumber() == flightNumber) {
-				return allFlights[i];
-			}
-		}
-		return null;
 	}
 }

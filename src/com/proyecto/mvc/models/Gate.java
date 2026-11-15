@@ -37,4 +37,19 @@ public class Gate {
 		return false;
 	}
 
+	// tamanos como texto, ej: "Pequeno/Mediano" (para la pantalla y el JSON)
+	public String getSizesText() {
+
+		String text = "";
+
+		for (int i = 0; i < allowedSizes.length; i++) {
+			if (i > 0) {
+				text += "/";
+			}
+			text += allowedSizes[i];
+		}
+
+		return text;
+	}
+
 }

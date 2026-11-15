@@ -9,7 +9,8 @@ public class Vertex {
 	private FlightList inbound;
 	private FlightList pending;
 	private FlightList landed;
-	
+	private SimpleList<Gate> gates;// puertas de embarque de este aeropuerto
+
 	public Vertex(String name) {
 		this.name = name;
 		this.adjacencylist = null;
@@ -19,6 +20,7 @@ public class Vertex {
 		this.inbound = new FlightList();
 		this.pending = new FlightList();
 		this.landed = new FlightList();
+		this.gates = new SimpleList<Gate>();
 	}
 	
 	public boolean isVisited() {
@@ -61,6 +63,22 @@ public class Vertex {
 
 	public FlightList getLanded() {
 		return landed;
+	}
+
+	public SimpleList<Gate> getGates() {
+		return gates;
+	}
+
+	// busca una puerta de este aeropuerto por su id (para no repetir ids)
+	public Gate findGate(String id) {
+		Node<Gate> aux = gates.getHead();
+		while (aux != null) {
+			if (aux.getData().getId().equalsIgnoreCase(id)) {
+				return aux.getData();
+			}
+			aux = aux.getNext();
+		}
+		return null;
 	}
 
 	public void clearFlights() {

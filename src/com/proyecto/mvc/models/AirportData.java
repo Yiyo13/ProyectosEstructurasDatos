@@ -55,6 +55,33 @@ public class AirportData {
 				writer.write(connections + "\n");
 			}
 
+			writer.write("  ],\n");
+			writer.write("  \"gates\": [\n");
+
+			// puertas de embarque de cada aeropuerto; los tamanos van separados por "/"
+			// porque extractField corta el valor en la primera coma
+			String gates = "";
+			aux = graph.getStart();
+
+			while (aux != null) {
+
+				Node<Gate> gate = aux.getVertex().getGates().getHead();
+
+				while (gate != null) {
+					if (!gates.isEmpty()) {
+						gates += ",\n";
+					}
+					gates += "    { \"airport\": \"" + aux.getVertex().getName() + "\", \"id\": \""
+							+ gate.getData().getId() + "\", \"sizes\": \"" + gate.getData().getSizesText() + "\" }";
+					gate = gate.getNext();
+				}
+				aux = aux.getNext();
+			}
+
+			if (!gates.isEmpty()) {
+				writer.write(gates + "\n");
+			}
+
 			writer.write("  ]\n");
 			writer.write("}\n");
 
@@ -88,6 +115,16 @@ public class AirportData {
 					String destination = extractField(line, "destination").replace("\"", "");
 					int distance = Integer.parseInt(extractField(line, "distance"));
 					graph.addEdge(origin, destination, distance);
+
+				} else if (line.startsWith("{ \"airport\"")) {
+					String airport = extractField(line, "airport").replace("\"", "");
+					String id = extractField(line, "id").replace("\"", "");
+					String sizes = extractField(line, "sizes").replace("\"", "");
+					Vertex vertex = graph.findVertex(airport);
+
+					if (vertex != null && vertex.findGate(id) == null) {
+						vertex.getGates().add(new Gate(id, sizes.split("/")));
+					}
 				}
 			}
 
@@ -114,4 +151,4 @@ public class AirportData {
 
 		return line.substring(colonIndex + 1, endIndex).trim();
 	}
-}
+}

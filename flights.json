@@ -85,18 +85,6 @@
       "boardingQueue": []
     },
     {
-      "flightNumber": 1935,
-      "origin": "San Jose",
-      "destination": "Madrid",
-      "planeType": "Embraer E190",
-      "maximumCapacity": 97,
-      "fuel": 50,
-      "status": "Aterrizado",
-      "seats": [
-      ],
-      "boardingQueue": []
-    },
-    {
       "flightNumber": 4521,
       "origin": "San Jose",
       "destination": "Madrid",
@@ -127,6 +115,18 @@
       "planeType": "Airbus A330",
       "maximumCapacity": 135,
       "fuel": 40,
+      "status": "Aterrizado",
+      "seats": [
+      ],
+      "boardingQueue": []
+    },
+    {
+      "flightNumber": 1935,
+      "origin": "San Jose",
+      "destination": "Madrid",
+      "planeType": "Embraer E190",
+      "maximumCapacity": 97,
+      "fuel": 50,
       "status": "Aterrizado",
       "seats": [
       ],

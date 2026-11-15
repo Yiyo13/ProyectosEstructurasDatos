@@ -18,7 +18,7 @@ public class GateLogic {
 		
 		solutionFound = false;
 		StringBuilder trace = new StringBuilder();
-		trace.append("Iniciando asignacion por Backingtrack");
+		trace.append("Iniciando asignacion por Backtracking\n");
 		
 		backTrack(0, flights, gates, trace);
 		
@@ -29,7 +29,7 @@ public class GateLogic {
 
 				if (assignmentResult[i] != -1) {
 					trace.append("Vuelo ").append(flights[i].getFlightNumber())
-					.append(" (Tamaño: ").append(flights[i].getSize()).append(")")
+					.append(" (Tamano: ").append(flights[i].getSize()).append(")")
 					.append(" -> Asignado a Puerta ").append(gates[assignmentResult[i]].getId()).append("\n");
 				} else {
 					trace.append("Vuelo ").append(flights[i].getFlightNumber())
@@ -38,7 +38,7 @@ public class GateLogic {
 			}	
 			
 		}else {
-			trace.append("\n*** NO existe solucion valida para esta combinación. ***\n");
+			trace.append("\n*** NO existe solucion valida para esta combinacion. ***\n");
 		}
 		
 		return trace.toString();
@@ -58,41 +58,56 @@ public class GateLogic {
 		
 		for (int gateIndex = 0; gateIndex < gates.length; gateIndex++) {
 			Gate currentGate = gates[gateIndex];
-			
-			if(currentGate.isCompatible(currentFlight.getSize()) && !isGateTaken(gateIndex)) {
-				
-				assignmentResult[flightIndex] = gateIndex;
-				
-				trace.append("Intento: vuelo ").append(currentFlight.getFlightNumber()).append(" Puerta")
-				.append(" Puerta").append(currentGate.getId()).append("(Valido)\n");	
-			
-			
+
+			// rechazo 1: la puerta no atiende el tamano de este avion
+			if(!currentGate.isCompatible(currentFlight.getSize())) {
+				trace.append("   Vuelo ").append(currentFlight.getFlightNumber())
+				.append(" -> Puerta ").append(currentGate.getId())
+				.append(": tamano incompatible (").append(currentFlight.getSize()).append(")\n");
+				continue;
+			}
+
+			// rechazo 2: la puerta ya la tiene otro vuelo de este mismo conjunto
+			int owner = gateTakenBy(gateIndex);
+			if(owner != -1) {
+				trace.append("   Vuelo ").append(currentFlight.getFlightNumber())
+				.append(" -> Puerta ").append(currentGate.getId())
+				.append(": ocupada por vuelo ").append(flights[owner].getFlightNumber()).append("\n");
+				continue;
+			}
+
+			// la puerta sirve: se asigna y se intenta con el siguiente vuelo
+			assignmentResult[flightIndex] = gateIndex;
+
+			trace.append("Intento: vuelo ").append(currentFlight.getFlightNumber())
+			.append(" -> Puerta ").append(currentGate.getId()).append(" (Valido)\n");
+
 			if(backTrack(flightIndex + 1, flights, gates, trace)) {
-				
+
 				return true;
 			}
-			
-		
+
+			// no llevo a una solucion: se deshace la asignacion y se prueba la siguiente puerta
 			assignmentResult[flightIndex] = -1;
-			
+
 			trace.append("RETROCESO: Vuelo ").append(currentFlight.getFlightNumber())
 			 .append(" libera la Puerta ").append(currentGate.getId())
-			 .append(" porque no llevó a una solución.\n");
-			}
+			 .append(" porque no llevo a una solucion.\n");
 		}
-		
+
 		return false;
 	}
-	
-	private boolean isGateTaken(int gateIndex) {
-		
+
+	// devuelve el indice del vuelo que tiene esa puerta, o -1 si esta libre
+	private int gateTakenBy(int gateIndex) {
+
 		for (int i = 0; i < assignmentResult.length; i++) {
 			if(assignmentResult[i] == gateIndex) {
-				return true;
+				return i;
 			}
 		}
-		
-		return false;
+
+		return -1;
 	}
 	
 }

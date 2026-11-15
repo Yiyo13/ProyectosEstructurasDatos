@@ -12,6 +12,8 @@ import com.proyecto.mvc.models.SimulationLogic;
 import com.proyecto.mvc.models.TripLogic;
 import com.proyecto.mvc.models.Stack;
 import com.proyecto.mvc.models.Trip;
+import com.proyecto.mvc.models.Gate;
+import com.proyecto.mvc.models.Vertex;
 import com.proyecto.mvc.views.ViewPrincipal;
 
 public class PrincipalController {
@@ -69,7 +71,7 @@ public class PrincipalController {
 		flightLogic.setSm(simulationLogic); 
 		landingController = new LandingController(vp, flightLogic, graph, simulationLogic);
 		// CAMBIO 2: cavernicola fabricar los tres. Antes nadie hacia nada, por eso no funcionaba
-		boardingGateController = new BoardingGateController(vp, flights);// puertas usa vuelos
+		boardingGateController = new BoardingGateController(vp, graph, airportD, airportsFile);// puertas de cada aeropuerto
 		simulationController = new SimulationController(vp, simulationLogic, graph, flightLogic);// jefe necesita cerebro
 	}
 
@@ -148,6 +150,12 @@ public class PrincipalController {
 		graph.addEdge("Paris", "Roma", 1100);
 		graph.addEdge("Paris", "Venecia", 850);
 		graph.addEdge("Roma", "Venecia", 400);
+
+		// puertas del ejemplo del enunciado
+		Vertex madrid = graph.findVertex("Madrid");
+		madrid.getGates().add(new Gate("P1", new String[] {"Pequeno", "Mediano"}));
+		madrid.getGates().add(new Gate("P2", new String[] {"Mediano", "Grande"}));
+		madrid.getGates().add(new Gate("P3", new String[] {"Grande"}));
 	}
 
 }
