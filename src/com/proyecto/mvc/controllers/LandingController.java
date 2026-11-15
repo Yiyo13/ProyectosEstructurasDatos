@@ -38,7 +38,7 @@ public class LandingController {
 			return false;
 		}
 
-		Flight[] pending = flightLogic.getPendingFlightsByAirport(airport);
+		Flight[] pending = graph.findVertex(airport).getPending().toArray();// pendientes de la lista propia del aeropuerto
 
 		if (pending.length == 0) {
 			steps = null;
@@ -127,7 +127,7 @@ public class LandingController {
 				return;
 			}
 
-			Flight[] pending = flightLogic.getPendingFlightsByAirport(selected);
+			Flight[] pending = graph.findVertex(selected).getPending().toArray();// pendientes de la lista propia del aeropuerto
 
 			if (pending.length == 0) {
 				JOptionPane.showMessageDialog(null, "No hay vuelos pendientes en " + selected);
